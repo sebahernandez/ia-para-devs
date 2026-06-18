@@ -1,0 +1,149 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import Icon from '../components/Icon.astro';
+
+// Traemos todos los posts y filtramos drafts en build-time
+const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featured = allPosts.find((p) => p.data.featured) ?? allPosts[0];
+const recent = allPosts.filter((p) => p.id !== featured.id).slice(0, 6);
+---
+
+<BaseLayout
+  title="Blog IA para devs · Noticias y análisis de modelos de IA"
+  description="Noticias, análisis y tutoriales sobre modelos de inteligencia artificial y herramientas para desarrolladores."
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <!-- Grid sutil de fondo: solo CSS, sin imágenes -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 opacity-[0.04]"
+      style="background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px); background-size: 48px 48px;"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-[420px] max-w-3xl rounded-full bg-white/[0.04] blur-3xl"
+    >
+    </div>
+
+    <div class="relative mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
+      <div class="inline-flex items-center gap-2 rounded-full border border-ink-700 bg-ink-900/60 px-3 py-1 text-xs text-ink-200">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+        Actualizado esta semana
+      </div>
+
+      <h1
+        class="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-white
+               sm:text-5xl md:text-6xl"
+      >
+        La IA, explicada para gente que escribe código.
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-300">
+        Lanzamientos, benchmarks y tutoriales prácticos sobre los modelos que
+        están cambiando cómo construimos software. Sin hype, sin humo.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5
+                 text-sm font-medium text-ink-950
+                 transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          Explorar artículos
+          <Icon name="arrow-right" size={15} stroke={2} />
+        </a>
+        <a
+          href="/about/"
+          class="inline-flex items-center gap-2 rounded-md border border-ink-700
+                 px-4 py-2.5 text-sm font-medium text-ink-100
+                 transition-colors hover:border-ink-500 hover:text-white"
+        >
+          Sobre el blog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  {
+    featured && (
+      <section class="mx-auto max-w-5xl px-6 pt-16">
+        <div class="flex items-end justify-between gap-4 pb-6">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-ink-400">
+              Destacado
+            </p>
+            <h2 class="mt-1 text-2xl font-semibold tracking-tight text-white">
+              Lecturas que no te puedes perder
+            </h2>
+          </div>
+          <a href="/blog/" class="hidden sm:inline link text-sm">
+            Ver todo →
+          </a>
+        </div>
+
+        <PostCard post={featured} featured={true} />
+      </section>
+    )
+  }
+
+  <!-- ÚLTIMOS POSTS -->
+  <section class="mx-auto max-w-5xl px-6 mt-16">
+    <div class="flex items-end justify-between gap-4 pb-6">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-400">
+          Recientes
+        </p>
+        <h2 class="mt-1 text-2xl font-semibold tracking-tight text-white">
+          Lo último en el blog
+        </h2>
+      </div>
+      <a href="/blog/" class="hidden sm:inline link text-sm">
+        Archivo completo →
+      </a>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {recent.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-6 mt-24">
+    <div
+      class="relative overflow-hidden rounded-2xl border border-ink-800 bg-ink-900/40 p-10 sm:p-14"
+    >
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/[0.04] blur-3xl"
+      >
+      </div>
+      <div class="relative max-w-2xl">
+        <h3 class="text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          ¿Modelos, herramientas, papers? Te lo destilamos.
+        </h3>
+        <p class="mt-4 text-pretty text-base leading-relaxed text-ink-300">
+          Cada lanzamiento importante, con lo que realmente importa para un
+          desarrollador: qué cambió, qué puedes usar hoy y qué todavía no vale
+          la pena.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/blog/" class="link text-sm">
+            Leer todos los artículos
+          </a>
+          <span class="text-ink-600">·</span>
+          <a href="/rss.xml" class="link text-sm">
+            Suscribirme por RSS
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

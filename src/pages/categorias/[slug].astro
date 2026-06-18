@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const categories = [...new Set(posts.map((p) => p.data.category))];
+
+  return categories.map((cat) => ({
+    params: { slug: cat },
+    props: {
+      category: cat,
+      posts: posts
+        .filter((p) => p.data.category === cat)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+
+const labels: Record<string, string> = {
+  modelos: 'Modelos',
+  herramientas: 'Herramientas',
+  investigacion: 'Investigación',
+  opinión: 'Opinión',
+  tutorial: 'Tutoriales',
+};
+const label = labels[category] ?? category;
+---
+
+<BaseLayout
+  title={`${label} · Blog IA para devs`}
+  description={`Artículos de ${label} sobre inteligencia artificial para desarrolladores.`}
+>
+  <section class="mx-auto max-w-5xl px-6 pt-20 pb-16">
+    <nav class="mb-8 text-sm">
+      <a href="/blog/" class="link">← Todos los artículos</a>
+    </nav>
+    <p class="font-mono text-xs uppercase tracking-widest text-ink-400">Categoría</p>
+    <h1 class="mt-2 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+      {label}
+    </h1>
+    <p class="mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-ink-300">
+      {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'} en esta categoría.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-24">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const tagMap = new Map<string, typeof posts>();
+  for (const p of posts) {
+    for (const t of p.data.tags) {
+      if (!tagMap.has(t)) tagMap.set(t, []);
+      tagMap.get(t)!.push(p);
+    }
+  }
+  return [...tagMap.entries()].map(([tag, list]) => ({
+    params: { slug: tag },
+    props: {
+      tag,
+      posts: list.sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+      ),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`#${tag} · Blog IA para devs`}
+  description={`Artículos etiquetados con #${tag}.`}
+>
+  <section class="mx-auto max-w-5xl px-6 pt-20 pb-16">
+    <nav class="mb-8 text-sm">
+      <a href="/blog/" class="link">← Todos los artículos</a>
+    </nav>
+    <p class="font-mono text-xs uppercase tracking-widest text-ink-400">Tag</p>
+    <h1 class="mt-2 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+      #{tag}
+    </h1>
+    <p class="mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-ink-300">
+      {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'} con este tag.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-24">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+</BaseLayout>

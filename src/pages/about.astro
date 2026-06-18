@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sobre el blog · Blog IA para devs"
+  description="Qué es este blog, quién lo escribe y por qué existe."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-20 pb-24">
+    <p class="font-mono text-xs uppercase tracking-widest text-ink-400">
+      Manifiesto
+    </p>
+    <h1
+      class="mt-2 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+    >
+      Sobre el blog
+    </h1>
+
+    <div class="post-content mt-12">
+      <p>
+        Este es un blog para gente que escribe código y quiere entender qué está
+        pasando con la inteligencia artificial. Sin titulares clickbait, sin
+        explicaciones condescendientes, sin humo.
+      </p>
+
+      <h2>Qué encontrarás aquí</h2>
+      <p>
+        Lanzamientos de modelos nuevos, con lo que realmente cambia para un
+        desarrollador. Tutoriales cortos y honestos. Benchmarks reales cuando
+        existen, y la verdad cuando no. Y opiniones, sí, pero bien argumentadas.
+      </p>
+
+      <h2>Qué NO encontrarás aquí</h2>
+      <ul>
+        <li>"5 prompts que te cambiarán la vida"</li>
+        <li>Predicciones de泡沫 sobre AGI</li>
+        <li>Reviews patrocinadas disfrazadas de análisis</li>
+        <li>Tutoriales que empiezan con "primero, instala 47 dependencias"</li>
+      </ul>
+
+      <h2>La pila técnica</h2>
+      <p>
+        El sitio está construido con <a href="https://astro.build">Astro</a> en
+        modo <code>static</code> y <a href="https://tailwindcss.com">Tailwind CSS</a>.
+        Todo el contenido se escribe en Markdown y se compila en build-time a
+        HTML estático. Eso significa que la página que estás leyendo pesa
+        prácticamente nada, carga al instante y no envía tu lectura a nadie.
+      </p>
+
+      <pre><code>// Stack
+astro: static site generation
+tailwindcss: utility-first CSS
+markdown: contenido en build-time
+javascript: solo para el toggle del menú móvil</code></pre>
+
+      <h2>Suscríbete</h2>
+      <p>
+        Hay RSS en <a href="/rss.xml">/rss.xml</a>. Si quieres seguir el blog,
+        esa es la mejor forma.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,143 @@
+---
+import Icon from './Icon.astro';
+
+const navItems = [
+  { href: '/', label: 'Inicio' },
+  { href: '/blog/', label: 'Artículos' },
+  { href: '/categorias/', label: 'Categorías' },
+  { href: '/about/', label: 'Sobre el blog' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-ink-800/80 bg-ink-950/80 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+    <a href="/" class="group flex items-center gap-2.5">
+      <span
+        class="theme-badge inline-flex h-7 w-7 items-center justify-center rounded-md font-bold text-sm"
+        aria-hidden="true"
+      >
+        IA
+      </span>
+      <span class="text-[15px] font-semibold tracking-tight text-white">
+        Blog <span class="text-ink-400 font-normal">/ IA para devs</span>
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7 text-sm">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-ink-200 transition-colors hover:text-white"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href="/rss.xml"
+        aria-label="RSS feed"
+        class="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-md
+               border border-ink-700 text-ink-200 transition-colors
+               hover:border-ink-500 hover:text-white"
+      >
+        <Icon name="rss" size={16} />
+      </a>
+
+      <!-- Botón tema claro/oscuro -->
+      <button
+        id="theme-toggle"
+        aria-label="Cambiar tema"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-md
+               border border-ink-700 text-ink-200 transition-colors
+               hover:border-ink-500 hover:text-white"
+      >
+        <!-- Sol: visible en modo oscuro (clic → modo claro) -->
+        <span id="icon-sun"><Icon name="sun" size={16} /></span>
+        <!-- Luna: visible en modo claro (clic → modo oscuro) -->
+        <span id="icon-moon" class="hidden"><Icon name="moon" size={16} /></span>
+      </button>
+
+      <a
+        href="/blog/"
+        class="theme-cta hidden sm:inline-flex items-center gap-1.5 rounded-md
+               px-3.5 py-2 text-sm font-medium
+               transition-transform duration-200 hover:-translate-y-0.5"
+      >
+        Leer
+        <Icon name="arrow-right" size={14} stroke={2} />
+      </a>
+
+      <button
+        id="mobile-toggle"
+        class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md
+               border border-ink-700 text-ink-200"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <Icon name="menu" size={18} />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-ink-800 bg-ink-950/95 backdrop-blur"
+  >
+    <nav class="mx-auto flex max-w-5xl flex-col gap-1 px-6 py-4 text-sm">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-md px-3 py-2.5 text-ink-200 hover:bg-ink-800 hover:text-white"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  // ─── Menú móvil ───────────────────────────────────────
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      mobileToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  // ─── Tema claro / oscuro ──────────────────────────────
+  function getCurrentTheme(): 'dark' | 'light' {
+    return document.documentElement.classList.contains('light') ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme: 'dark' | 'light') {
+    document.documentElement.classList.toggle('light', theme === 'light');
+    localStorage.setItem('theme', theme);
+    syncIcon(theme);
+  }
+
+  function syncIcon(theme: 'dark' | 'light') {
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+    if (!sun || !moon) return;
+    // Sol visible en oscuro, luna visible en claro
+    sun.classList.toggle('hidden', theme === 'light');
+    moon.classList.toggle('hidden', theme === 'dark');
+  }
+
+  // Sincronizar icono con el tema actual al cargar
+  syncIcon(getCurrentTheme());
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    applyTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
+  });
+</script>
