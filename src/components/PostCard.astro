@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import { getCatClass } from '../utils/categories';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -27,7 +28,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
           ${featured ? 'md:p-8' : ''}`}
 >
   <div class="flex items-center gap-3 text-xs text-ink-400">
-    <span class="font-mono uppercase tracking-widest text-ink-300">
+    <span class={`font-mono uppercase tracking-widest ${getCatClass(data.category)}`}>
       {data.category}
     </span>
     <span class="h-1 w-1 rounded-full bg-ink-600"></span>

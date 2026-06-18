@@ -285,6 +285,23 @@ html.light {
   .link:hover {
     @apply decoration-white;
   }
+
+  /* ─── Cyberpunk category colors ────────────────────────────────
+     Dark mode: neon con glow sutil.
+     Light mode: versiones oscuras y saturadas del mismo tono
+                 para garantizar contraste ≥ 4.5:1 sobre fondo claro.
+  ─────────────────────────────────────────────────────────────── */
+  .cat-tutorial       { color: #00e5ff; text-shadow: 0 0 8px rgb(0 229 255 / 0.35); }
+  .cat-herramientas   { color: #69ff47; text-shadow: 0 0 8px rgb(105 255 71 / 0.3); }
+  .cat-modelos        { color: #e040fb; text-shadow: 0 0 8px rgb(224 64 251 / 0.3); }
+  .cat-investigacion  { color: #ff1744; text-shadow: 0 0 8px rgb(255 23 68 / 0.3); }
+  .cat-opinion        { color: #ff9100; text-shadow: 0 0 8px rgb(255 145 0 / 0.3); }
+
+  html.light .cat-tutorial      { color: #0097a7; text-shadow: none; }
+  html.light .cat-herramientas  { color: #2e7d32; text-shadow: none; }
+  html.light .cat-modelos       { color: #7b1fa2; text-shadow: none; }
+  html.light .cat-investigacion { color: #c62828; text-shadow: none; }
+  html.light .cat-opinion       { color: #e65100; text-shadow: none; }
 }
 
 @layer utilities {

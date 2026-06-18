@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import { getCatClass } from '../utils/categories';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -33,7 +34,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
       <div class="flex flex-wrap items-center gap-3 text-xs text-ink-400">
         <a
           href={`/categorias/${data.category}/`}
-          class="font-mono uppercase tracking-widest text-ink-300 hover:text-white"
+          class={`font-mono uppercase tracking-widest transition-[filter] hover:brightness-125 ${getCatClass(data.category)}`}
         >
           {data.category}
         </a>

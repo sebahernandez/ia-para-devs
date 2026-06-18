@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import { getCatClass } from '../../utils/categories';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -39,7 +40,7 @@ const label = labels[category] ?? category;
       <a href="/blog/" class="link">← Todos los artículos</a>
     </nav>
     <p class="font-mono text-xs uppercase tracking-widest text-ink-400">Categoría</p>
-    <h1 class="mt-2 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+    <h1 class={`mt-2 text-balance text-4xl font-semibold tracking-tight sm:text-5xl ${getCatClass(category)}`}>
       {label}
     </h1>
     <p class="mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-ink-300">
