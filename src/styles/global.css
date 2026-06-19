@@ -312,6 +312,38 @@ html.light {
   html.light .cat-modelos       { color: #7b1fa2; text-shadow: none; }
   html.light .cat-investigacion { color: #c62828; text-shadow: none; }
   html.light .cat-opinion       { color: #e65100; text-shadow: none; }
+
+  /* ─── Botones de filtro de categorías en modo claro ─── */
+  html.light .cat-btn {
+    background-color: #ffffff;
+    border-color: currentColor;   /* hereda el color de categoría */
+    opacity: 0.55;
+  }
+  html.light .cat-btn:hover {
+    background-color: #f9fafb;
+    opacity: 0.85;
+  }
+  html.light .cat-btn[data-active] {
+    opacity: 1;
+    background-color: #ffffff;
+    border-color: currentColor;
+    box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent),
+                0 1px 3px rgb(0 0 0 / 0.08);
+  }
+  /* "Todos" activo: sin color de categoría → estilo neutro destacado */
+  html.light .cat-btn[data-cat="all"] {
+    color: #374151;
+    opacity: 0.6;
+  }
+  html.light .cat-btn[data-cat="all"]:hover {
+    opacity: 0.85;
+  }
+  html.light .cat-btn[data-cat="all"][data-active] {
+    background-color: #1f2937;
+    border-color: #1f2937;
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
+  }
 }
 
 /* Logo adaptivo: una sola imagen, dos fuentes según tema */

@@ -87,42 +87,45 @@ const navItems = [
 </header>
 
 <script>
-  // ─── Menú móvil ───────────────────────────────────────
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('hidden') === false;
-      mobileToggle.setAttribute('aria-expanded', String(open));
+  function setup() {
+    // ─── Menú móvil ───────────────────────────────────────
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('hidden') === false;
+        mobileToggle.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    // ─── Tema claro / oscuro ──────────────────────────────
+    function getCurrentTheme(): 'dark' | 'light' {
+      return document.documentElement.classList.contains('light') ? 'light' : 'dark';
+    }
+
+    function applyTheme(theme: 'dark' | 'light') {
+      document.documentElement.classList.toggle('light', theme === 'light');
+      localStorage.setItem('theme', theme);
+      syncIcon(theme);
+    }
+
+    function syncIcon(theme: 'dark' | 'light') {
+      const sun = document.getElementById('icon-sun');
+      const moon = document.getElementById('icon-moon');
+      if (!sun || !moon) return;
+      sun.classList.toggle('hidden', theme === 'light');
+      moon.classList.toggle('hidden', theme === 'dark');
+    }
+
+    syncIcon(getCurrentTheme());
+
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      applyTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
     });
   }
 
-  // ─── Tema claro / oscuro ──────────────────────────────
-  function getCurrentTheme(): 'dark' | 'light' {
-    return document.documentElement.classList.contains('light') ? 'light' : 'dark';
-  }
-
-  function applyTheme(theme: 'dark' | 'light') {
-    document.documentElement.classList.toggle('light', theme === 'light');
-    localStorage.setItem('theme', theme);
-    syncIcon(theme);
-  }
-
-  function syncIcon(theme: 'dark' | 'light') {
-    const sun = document.getElementById('icon-sun');
-    const moon = document.getElementById('icon-moon');
-    if (!sun || !moon) return;
-    // Sol visible en oscuro, luna visible en claro
-    sun.classList.toggle('hidden', theme === 'light');
-    moon.classList.toggle('hidden', theme === 'dark');
-  }
-
-  // Sincronizar icono con el tema actual al cargar
-  syncIcon(getCurrentTheme());
-
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    applyTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
-  });
+  // Corre en carga inicial y después de cada navegación con ViewTransitions
+  document.addEventListener('astro:page-load', setup);
 </script>
 
 <style>
