@@ -2,18 +2,21 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import { getCatClass } from '../../utils/categories';
 
 const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const BATCH = 6;
+
+const categories = [...new Set(allPosts.map(p => p.data.category))].sort() as string[];
 ---
 
 <BaseLayout
   title="Todos los artículos · Blog IA para devs"
   description="Archivo completo de noticias, análisis y tutoriales sobre IA para desarrolladores."
 >
-  <section class="mx-auto max-w-5xl px-6 pt-20 pb-16">
+  <section class="mx-auto max-w-5xl px-6 pt-20 pb-10">
     <p class="font-mono text-xs uppercase tracking-widest text-ink-400">Archivo</p>
     <h1 class="mt-2 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
       Todos los artículos
@@ -23,10 +26,76 @@ const BATCH = 6;
     </p>
   </section>
 
+  <!-- Barra de búsqueda + filtro de categorías -->
+  <section class="mx-auto max-w-5xl px-6 pb-8">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+      <!-- Buscador -->
+      <div class="relative w-full sm:max-w-xs">
+        <svg
+          class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-500"
+          xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Buscar artículos…"
+          autocomplete="off"
+          class="w-full rounded-lg border border-ink-700 bg-ink-900/60 py-2.5 pl-9 pr-4
+                 text-sm text-ink-100 placeholder-ink-500
+                 transition-colors duration-200
+                 focus:border-ink-500 focus:outline-none focus:ring-1 focus:ring-ink-500"
+        />
+      </div>
+
+      <!-- Filtro de categorías -->
+      <div id="cat-filter" class="flex flex-wrap gap-2">
+        <button
+          data-cat="all"
+          data-active
+          class="cat-btn rounded-full border border-ink-600 bg-ink-800 px-3.5 py-1.5
+                 text-xs font-medium text-white transition-all duration-200
+                 hover:border-ink-400"
+        >
+          Todos
+        </button>
+        {categories.map((cat) => (
+          <button
+            data-cat={cat}
+            class={`cat-btn rounded-full border border-ink-700 bg-ink-900/40 px-3.5 py-1.5
+                    text-xs font-medium text-ink-400 transition-all duration-200
+                    hover:border-ink-500 hover:text-ink-200 ${getCatClass(cat)}`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Estado vacío -->
+    <p
+      id="no-results"
+      class="hidden mt-10 text-center text-sm text-ink-500"
+      aria-live="polite"
+    >
+      No se encontraron artículos para esa búsqueda.
+    </p>
+  </section>
+
   <section class="mx-auto max-w-5xl px-6 pb-24">
     <div id="posts-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {allPosts.map((post, i) => (
-        <div data-post-index={i} class="post-item">
+        <div
+          data-post-index={i}
+          data-category={post.data.category}
+          data-title={post.data.title.toLowerCase()}
+          data-desc={post.data.description.toLowerCase()}
+          class="post-item"
+        >
           <PostCard post={post} />
         </div>
       ))}
@@ -73,21 +142,58 @@ const BATCH = 6;
     opacity: 0;
     transform: translateY(14px);
   }
+
+  /* Botón de categoría activo — elimina el tono ink y realza el color de categoría */
+  .cat-btn[data-active] {
+    border-color: currentColor;
+    background-color: rgb(255 255 255 / 0.06);
+    opacity: 1;
+  }
+  /* "Todos" activo */
+  .cat-btn[data-cat="all"][data-active] {
+    border-color: rgb(var(--ink-500));
+    background-color: rgb(var(--ink-800));
+    color: white;
+  }
 </style>
 
 <script define:vars={{ BATCH, total: allPosts.length }}>
-  const grid = document.getElementById('posts-grid');
-  const area = document.getElementById('load-more-area');
-  const btn  = document.getElementById('load-more-btn');
-  const label = document.getElementById('btn-label');
-  const count = document.getElementById('btn-count');
-  const icon  = document.getElementById('btn-icon');
+  const grid     = document.getElementById('posts-grid');
+  const area     = document.getElementById('load-more-area');
+  const btn      = document.getElementById('load-more-btn');
+  const label    = document.getElementById('btn-label');
+  const count    = document.getElementById('btn-count');
+  const icon     = document.getElementById('btn-icon');
   const progress = document.getElementById('progress-label');
+  const searchInput = document.getElementById('search-input');
+  const catBtns  = document.querySelectorAll('.cat-btn');
+  const noResults = document.getElementById('no-results');
 
   const items = Array.from(grid.querySelectorAll('.post-item'));
   let shown = BATCH;
+  let activeCategory = 'all';
+  let searchQuery = '';
 
-  function updateUI() {
+  /* ─── Helpers ─────────────────────────────────────────────── */
+
+  function isFiltering() {
+    return activeCategory !== 'all' || searchQuery.trim() !== '';
+  }
+
+  function getVisibleItems() {
+    const q = searchQuery.trim().toLowerCase();
+    return items.filter(item => {
+      const catMatch = activeCategory === 'all' || item.dataset.category === activeCategory;
+      const textMatch = !q ||
+        item.dataset.title.includes(q) ||
+        item.dataset.desc.includes(q);
+      return catMatch && textMatch;
+    });
+  }
+
+  /* ─── Load-more UI ────────────────────────────────────────── */
+
+  function updateLoadMoreUI() {
     const remaining = total - shown;
     count.textContent = remaining > 0 ? `${remaining} restantes` : '';
     progress.textContent = `Mostrando ${Math.min(shown, total)} de ${total}`;
@@ -97,23 +203,67 @@ const BATCH = 6;
       label.textContent = 'Todo al día';
       icon.innerHTML = '<path d="M20 6L9 17l-5-5"/>';
       count.textContent = '';
+    } else {
+      btn.disabled = false;
+      label.textContent = 'Ver más';
+      icon.innerHTML = '<path d="M12 5v14M5 12l7 7 7-7"/>';
     }
   }
 
-  function init() {
-    // Ocultar posts más allá del primer batch
-    items.forEach((item, i) => {
-      if (i >= shown) item.setAttribute('data-hidden', '');
+  /* ─── Aplicar filtros ─────────────────────────────────────── */
+
+  function applyFilters() {
+    const filtered = getVisibleItems();
+
+    items.forEach(item => {
+      if (filtered.includes(item)) {
+        item.removeAttribute('data-hidden');
+      } else {
+        item.setAttribute('data-hidden', '');
+      }
     });
 
-    if (total > BATCH) {
-      area.classList.remove('hidden');
-      updateUI();
+    noResults.classList.toggle('hidden', filtered.length > 0);
+
+    if (isFiltering()) {
+      // Modo filtro: mostrar todos los resultados, ocultar paginación
+      area.classList.add('hidden');
+    } else {
+      // Modo normal: restaurar paginación por batch
+      shown = BATCH;
+      items.forEach((item, i) => {
+        if (i >= shown) item.setAttribute('data-hidden', '');
+      });
+      if (total > BATCH) {
+        area.classList.remove('hidden');
+        updateLoadMoreUI();
+      } else {
+        area.classList.add('hidden');
+      }
     }
   }
 
+  /* ─── Categorías ──────────────────────────────────────────── */
+
+  catBtns.forEach(catBtn => {
+    catBtn.addEventListener('click', () => {
+      catBtns.forEach(b => b.removeAttribute('data-active'));
+      catBtn.setAttribute('data-active', '');
+      activeCategory = catBtn.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  /* ─── Buscador ────────────────────────────────────────────── */
+
+  searchInput.addEventListener('input', () => {
+    searchQuery = searchInput.value;
+    applyFilters();
+  });
+
+  /* ─── Cargar más ──────────────────────────────────────────── */
+
   function revealNext() {
-    // Estado de carga
     btn.disabled = true;
     label.textContent = 'Cargando';
     icon.innerHTML = `
@@ -125,13 +275,11 @@ const BATCH = 6;
     setTimeout(() => {
       const next = items.slice(shown, shown + BATCH);
 
-      // Marcar como "entrando" antes de mostrar para tener el estado inicial de la transición
       next.forEach(item => {
         item.removeAttribute('data-hidden');
         item.setAttribute('data-entering', '');
       });
 
-      // Un frame después: arrancar transición con stagger
       requestAnimationFrame(() => {
         next.forEach((item, i) => {
           setTimeout(() => {
@@ -142,17 +290,26 @@ const BATCH = 6;
 
       shown = Math.min(shown + BATCH, total);
 
-      // Restaurar botón
       icon.style.animation = '';
       icon.innerHTML = '<path d="M12 5v14M5 12l7 7 7-7"/>';
       label.textContent = 'Ver más';
       btn.disabled = false;
 
-      updateUI();
-
-      // Scroll suave al primer card nuevo
+      updateLoadMoreUI();
       next[0]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 320);
+  }
+
+  /* ─── Init ────────────────────────────────────────────────── */
+
+  function init() {
+    items.forEach((item, i) => {
+      if (i >= shown) item.setAttribute('data-hidden', '');
+    });
+    if (total > BATCH) {
+      area.classList.remove('hidden');
+      updateLoadMoreUI();
+    }
   }
 
   btn.addEventListener('click', revealNext);
