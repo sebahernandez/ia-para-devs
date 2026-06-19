@@ -146,6 +146,9 @@ const labels: Record<string, string> = {
   .post-item[data-hidden] {
     display: none;
   }
+  .post-item[data-hidden] {
+    display: none;
+  }
   .post-item[data-entering] {
     opacity: 0;
     transform: translateY(14px);
@@ -166,89 +169,76 @@ const labels: Record<string, string> = {
   }
 </style>
 
-<script define:vars={{ BATCH, total: allPosts.length }}>
-  const grid     = document.getElementById('posts-grid');
-  const area     = document.getElementById('load-more-area');
-  const btn      = document.getElementById('load-more-btn');
-  const label    = document.getElementById('btn-label');
-  const count    = document.getElementById('btn-count');
-  const icon     = document.getElementById('btn-icon');
-  const progress = document.getElementById('progress-label');
+<script define:vars={{ BATCH }}>
+  const grid        = document.getElementById('posts-grid');
+  const area        = document.getElementById('load-more-area');
+  const btn         = document.getElementById('load-more-btn');
+  const label       = document.getElementById('btn-label');
+  const count       = document.getElementById('btn-count');
+  const icon        = document.getElementById('btn-icon');
+  const progress    = document.getElementById('progress-label');
   const searchInput = document.getElementById('search-input');
-  const catBtns  = document.querySelectorAll('.cat-btn');
-  const noResults = document.getElementById('no-results');
+  const catBtns     = document.querySelectorAll('.cat-btn');
+  const noResults   = document.getElementById('no-results');
 
   const items = Array.from(grid.querySelectorAll('.post-item'));
-  let shown = BATCH;
   let activeCategory = 'all';
-  let searchQuery = '';
+  let searchQuery    = '';
+  let filtered       = items.slice(); // conjunto activo actual
+  let shownCount     = BATCH;
 
   /* ─── Helpers ─────────────────────────────────────────────── */
 
-  function isFiltering() {
-    return activeCategory !== 'all' || searchQuery.trim() !== '';
-  }
-
-  function getVisibleItems() {
+  function getFiltered() {
     const q = searchQuery.trim().toLowerCase();
     return items.filter(item => {
-      const catMatch = activeCategory === 'all' || item.dataset.category === activeCategory;
-      const textMatch = !q ||
-        item.dataset.title.includes(q) ||
-        item.dataset.desc.includes(q);
+      const catMatch  = activeCategory === 'all' || item.dataset.category === activeCategory;
+      const textMatch = !q || item.dataset.title.includes(q) || item.dataset.desc.includes(q);
       return catMatch && textMatch;
     });
   }
 
-  /* ─── Load-more UI ────────────────────────────────────────── */
+  /* ─── UI del botón ────────────────────────────────────────── */
 
   function updateLoadMoreUI() {
-    const remaining = total - shown;
-    count.textContent = remaining > 0 ? `${remaining} restantes` : '';
-    progress.textContent = `Mostrando ${Math.min(shown, total)} de ${total}`;
+    const remaining = filtered.length - shownCount;
+    count.textContent    = remaining > 0 ? `${remaining} restantes` : '';
+    progress.textContent = `Mostrando ${Math.min(shownCount, filtered.length)} de ${filtered.length}`;
 
     if (remaining <= 0) {
-      btn.disabled = true;
-      label.textContent = 'Todo al día';
-      icon.innerHTML = '<path d="M20 6L9 17l-5-5"/>';
-      count.textContent = '';
+      btn.disabled         = true;
+      label.textContent    = 'Todo al día';
+      icon.innerHTML       = '<path d="M20 6L9 17l-5-5"/>';
+      count.textContent    = '';
     } else {
-      btn.disabled = false;
+      btn.disabled      = false;
       label.textContent = 'Ver más';
-      icon.innerHTML = '<path d="M12 5v14M5 12l7 7 7-7"/>';
+      icon.innerHTML    = '<path d="M12 5v14M5 12l7 7 7-7"/>';
     }
   }
 
-  /* ─── Aplicar filtros ─────────────────────────────────────── */
+  /* ─── Renderizar conjunto filtrado con paginación ─────────── */
 
   function applyFilters() {
-    const filtered = getVisibleItems();
+    filtered   = getFiltered();
+    shownCount = BATCH;
 
     items.forEach(item => {
-      if (filtered.includes(item)) {
-        item.removeAttribute('data-hidden');
-      } else {
+      const idx = filtered.indexOf(item);
+      if (idx === -1 || idx >= shownCount) {
         item.setAttribute('data-hidden', '');
+      } else {
+        item.removeAttribute('data-hidden');
       }
     });
 
     noResults.classList.toggle('hidden', filtered.length > 0);
 
-    if (isFiltering()) {
-      // Modo filtro: mostrar todos los resultados, ocultar paginación
-      area.classList.add('hidden');
+    if (filtered.length > BATCH) {
+      area.classList.remove('hidden');
+      updateLoadMoreUI();
     } else {
-      // Modo normal: restaurar paginación por batch
-      shown = BATCH;
-      items.forEach((item, i) => {
-        if (i >= shown) item.setAttribute('data-hidden', '');
-      });
-      if (total > BATCH) {
-        area.classList.remove('hidden');
-        updateLoadMoreUI();
-      } else {
-        area.classList.add('hidden');
-      }
+      area.classList.add('hidden');
     }
   }
 
@@ -273,36 +263,29 @@ const labels: Record<string, string> = {
   /* ─── Cargar más ──────────────────────────────────────────── */
 
   function revealNext() {
-    btn.disabled = true;
+    btn.disabled      = true;
     label.textContent = 'Cargando';
-    icon.innerHTML = `
-      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83
-               M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-    `;
+    icon.innerHTML    = `<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83
+             M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>`;
     icon.style.animation = 'spin 0.7s linear infinite';
 
     setTimeout(() => {
-      const next = items.slice(shown, shown + BATCH);
+      const next = filtered.slice(shownCount, shownCount + BATCH);
 
       next.forEach(item => {
         item.removeAttribute('data-hidden');
         item.setAttribute('data-entering', '');
       });
-
       requestAnimationFrame(() => {
-        next.forEach((item, i) => {
-          setTimeout(() => {
-            item.removeAttribute('data-entering');
-          }, i * 70);
-        });
+        next.forEach((item, i) => setTimeout(() => item.removeAttribute('data-entering'), i * 70));
       });
 
-      shown = Math.min(shown + BATCH, total);
+      shownCount = Math.min(shownCount + BATCH, filtered.length);
 
       icon.style.animation = '';
-      icon.innerHTML = '<path d="M12 5v14M5 12l7 7 7-7"/>';
-      label.textContent = 'Ver más';
-      btn.disabled = false;
+      icon.innerHTML       = '<path d="M12 5v14M5 12l7 7 7-7"/>';
+      label.textContent    = 'Ver más';
+      btn.disabled         = false;
 
       updateLoadMoreUI();
       next[0]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -311,18 +294,8 @@ const labels: Record<string, string> = {
 
   /* ─── Init ────────────────────────────────────────────────── */
 
-  function init() {
-    items.forEach((item, i) => {
-      if (i >= shown) item.setAttribute('data-hidden', '');
-    });
-    if (total > BATCH) {
-      area.classList.remove('hidden');
-      updateLoadMoreUI();
-    }
-  }
-
   btn.addEventListener('click', revealNext);
-  init();
+  applyFilters(); // arranca igual que un cambio de filtro
 </script>
 
 <style is:global>
