@@ -40,6 +40,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   <h3
     class={`mt-4 font-semibold tracking-tight text-white text-balance
             ${featured ? 'text-2xl' : 'text-lg'}`}
+    transition:name={`post-title-${post.id}`}
   >
     <a href={href} class="before:absolute before:inset-0">
       {data.title}

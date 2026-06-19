@@ -143,6 +143,16 @@ html.light {
     color: #ffffff;
   }
 
+  /* Hero grid y glow — modo claro */
+  html.light .hero-grid {
+    background-image: linear-gradient(rgba(0,0,0,.45) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,0,0,.45) 1px, transparent 1px) !important;
+    opacity: 0.07;
+  }
+  html.light .hero-glow {
+    background-color: rgb(156 163 175 / 0.18);
+  }
+
   /* Hairline gradient: adapta al modo claro */
   html.light .hairline {
     background-image: linear-gradient(
@@ -303,6 +313,10 @@ html.light {
   html.light .cat-investigacion { color: #c62828; text-shadow: none; }
   html.light .cat-opinion       { color: #e65100; text-shadow: none; }
 }
+
+/* Logo adaptivo: una sola imagen, dos fuentes según tema */
+  .logo-adaptive        { content: url('/logo-white.svg'); }
+  html.light .logo-adaptive { content: url('/logo-black.svg'); }
 
 @layer utilities {
   .text-balance {

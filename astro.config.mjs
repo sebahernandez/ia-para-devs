@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // Combinado con Content Collections de tipo `content` (Markdown), cada .md
 // se transforma en una página HTML estática automáticamente.
 export default defineConfig({
-  site: 'https://blog-ia.example.com',
+  site: 'https://iaparadevs.com',
   output: 'static',
   integrations: [
     tailwind({

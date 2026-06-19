@@ -10,6 +10,14 @@ const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
 const BATCH = 6;
 
 const categories = [...new Set(allPosts.map(p => p.data.category))].sort() as string[];
+
+const labels: Record<string, string> = {
+  modelos: 'Modelos',
+  herramientas: 'Herramientas',
+  investigacion: 'Investigación',
+  opinión: 'Opinión',
+  tutorial: 'Tutoriales',
+};
 ---
 
 <BaseLayout
@@ -67,10 +75,10 @@ const categories = [...new Set(allPosts.map(p => p.data.category))].sort() as st
           <button
             data-cat={cat}
             class={`cat-btn rounded-full border border-ink-700 bg-ink-900/40 px-3.5 py-1.5
-                    text-xs font-medium text-ink-400 transition-all duration-200
-                    hover:border-ink-500 hover:text-ink-200 ${getCatClass(cat)}`}
+                    text-xs font-medium opacity-50 transition-all duration-200
+                    hover:border-ink-500 hover:opacity-100 ${getCatClass(cat)}`}
           >
-            {cat}
+            {labels[cat] ?? cat}
           </button>
         ))}
       </div>
@@ -143,17 +151,18 @@ const categories = [...new Set(allPosts.map(p => p.data.category))].sort() as st
     transform: translateY(14px);
   }
 
-  /* Botón de categoría activo — elimina el tono ink y realza el color de categoría */
+  /* Botón de categoría activo */
   .cat-btn[data-active] {
+    opacity: 1;
     border-color: currentColor;
     background-color: rgb(255 255 255 / 0.06);
-    opacity: 1;
   }
   /* "Todos" activo */
   .cat-btn[data-cat="all"][data-active] {
     border-color: rgb(var(--ink-500));
     background-color: rgb(var(--ink-800));
     color: white;
+    opacity: 1;
   }
 </style>
 
