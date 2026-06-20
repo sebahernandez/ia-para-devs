@@ -170,132 +170,137 @@ const labels: Record<string, string> = {
 </style>
 
 <script define:vars={{ BATCH }}>
-  const grid        = document.getElementById('posts-grid');
-  const area        = document.getElementById('load-more-area');
-  const btn         = document.getElementById('load-more-btn');
-  const label       = document.getElementById('btn-label');
-  const count       = document.getElementById('btn-count');
-  const icon        = document.getElementById('btn-icon');
-  const progress    = document.getElementById('progress-label');
-  const searchInput = document.getElementById('search-input');
-  const catBtns     = document.querySelectorAll('.cat-btn');
-  const noResults   = document.getElementById('no-results');
+  function setup() {
+    const grid        = document.getElementById('posts-grid');
+    const area        = document.getElementById('load-more-area');
+    const btn         = document.getElementById('load-more-btn');
+    const label       = document.getElementById('btn-label');
+    const count       = document.getElementById('btn-count');
+    const icon        = document.getElementById('btn-icon');
+    const progress    = document.getElementById('progress-label');
+    const searchInput = document.getElementById('search-input');
+    const catBtns     = document.querySelectorAll('.cat-btn');
+    const noResults   = document.getElementById('no-results');
 
-  const items = Array.from(grid.querySelectorAll('.post-item'));
-  let activeCategory = 'all';
-  let searchQuery    = '';
-  let filtered       = items.slice(); // conjunto activo actual
-  let shownCount     = BATCH;
+    if (!grid || !btn) return; // no estamos en esta página
 
-  /* ─── Helpers ─────────────────────────────────────────────── */
+    const items = Array.from(grid.querySelectorAll('.post-item'));
+    let activeCategory = 'all';
+    let searchQuery    = '';
+    let filtered       = items.slice();
+    let shownCount     = BATCH;
 
-  function getFiltered() {
-    const q = searchQuery.trim().toLowerCase();
-    return items.filter(item => {
-      const catMatch  = activeCategory === 'all' || item.dataset.category === activeCategory;
-      const textMatch = !q || item.dataset.title.includes(q) || item.dataset.desc.includes(q);
-      return catMatch && textMatch;
-    });
-  }
+    /* ─── Helpers ─────────────────────────────────────────────── */
 
-  /* ─── UI del botón ────────────────────────────────────────── */
-
-  function updateLoadMoreUI() {
-    const remaining = filtered.length - shownCount;
-    count.textContent    = remaining > 0 ? `${remaining} restantes` : '';
-    progress.textContent = `Mostrando ${Math.min(shownCount, filtered.length)} de ${filtered.length}`;
-
-    if (remaining <= 0) {
-      btn.disabled         = true;
-      label.textContent    = 'Todo al día';
-      icon.innerHTML       = '<path d="M20 6L9 17l-5-5"/>';
-      count.textContent    = '';
-    } else {
-      btn.disabled      = false;
-      label.textContent = 'Ver más';
-      icon.innerHTML    = '<path d="M12 5v14M5 12l7 7 7-7"/>';
+    function getFiltered() {
+      const q = searchQuery.trim().toLowerCase();
+      return items.filter(item => {
+        const catMatch  = activeCategory === 'all' || item.dataset.category === activeCategory;
+        const textMatch = !q || item.dataset.title.includes(q) || item.dataset.desc.includes(q);
+        return catMatch && textMatch;
+      });
     }
-  }
 
-  /* ─── Renderizar conjunto filtrado con paginación ─────────── */
+    /* ─── UI del botón ────────────────────────────────────────── */
 
-  function applyFilters() {
-    filtered   = getFiltered();
-    shownCount = BATCH;
+    function updateLoadMoreUI() {
+      const remaining = filtered.length - shownCount;
+      count.textContent    = remaining > 0 ? `${remaining} restantes` : '';
+      progress.textContent = `Mostrando ${Math.min(shownCount, filtered.length)} de ${filtered.length}`;
 
-    items.forEach(item => {
-      const idx = filtered.indexOf(item);
-      if (idx === -1 || idx >= shownCount) {
-        item.setAttribute('data-hidden', '');
+      if (remaining <= 0) {
+        btn.disabled         = true;
+        label.textContent    = 'Todo al día';
+        icon.innerHTML       = '<path d="M20 6L9 17l-5-5"/>';
+        count.textContent    = '';
       } else {
-        item.removeAttribute('data-hidden');
+        btn.disabled      = false;
+        label.textContent = 'Ver más';
+        icon.innerHTML    = '<path d="M12 5v14M5 12l7 7 7-7"/>';
       }
+    }
+
+    /* ─── Renderizar conjunto filtrado con paginación ─────────── */
+
+    function applyFilters() {
+      filtered   = getFiltered();
+      shownCount = BATCH;
+
+      items.forEach(item => {
+        const idx = filtered.indexOf(item);
+        if (idx === -1 || idx >= shownCount) {
+          item.setAttribute('data-hidden', '');
+        } else {
+          item.removeAttribute('data-hidden');
+        }
+      });
+
+      noResults.classList.toggle('hidden', filtered.length > 0);
+
+      if (filtered.length > BATCH) {
+        area.classList.remove('hidden');
+        updateLoadMoreUI();
+      } else {
+        area.classList.add('hidden');
+      }
+    }
+
+    /* ─── Categorías ──────────────────────────────────────────── */
+
+    catBtns.forEach(catBtn => {
+      catBtn.addEventListener('click', () => {
+        catBtns.forEach(b => b.removeAttribute('data-active'));
+        catBtn.setAttribute('data-active', '');
+        activeCategory = catBtn.dataset.cat;
+        applyFilters();
+      });
     });
 
-    noResults.classList.toggle('hidden', filtered.length > 0);
+    /* ─── Buscador ────────────────────────────────────────────── */
 
-    if (filtered.length > BATCH) {
-      area.classList.remove('hidden');
-      updateLoadMoreUI();
-    } else {
-      area.classList.add('hidden');
-    }
-  }
-
-  /* ─── Categorías ──────────────────────────────────────────── */
-
-  catBtns.forEach(catBtn => {
-    catBtn.addEventListener('click', () => {
-      catBtns.forEach(b => b.removeAttribute('data-active'));
-      catBtn.setAttribute('data-active', '');
-      activeCategory = catBtn.dataset.cat;
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value;
       applyFilters();
     });
-  });
 
-  /* ─── Buscador ────────────────────────────────────────────── */
+    /* ─── Cargar más ──────────────────────────────────────────── */
 
-  searchInput.addEventListener('input', () => {
-    searchQuery = searchInput.value;
+    function revealNext() {
+      btn.disabled      = true;
+      label.textContent = 'Cargando';
+      icon.innerHTML    = `<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83
+               M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>`;
+      icon.style.animation = 'spin 0.7s linear infinite';
+
+      setTimeout(() => {
+        const next = filtered.slice(shownCount, shownCount + BATCH);
+
+        next.forEach(item => {
+          item.removeAttribute('data-hidden');
+          item.setAttribute('data-entering', '');
+        });
+        requestAnimationFrame(() => {
+          next.forEach((item, i) => setTimeout(() => item.removeAttribute('data-entering'), i * 70));
+        });
+
+        shownCount = Math.min(shownCount + BATCH, filtered.length);
+
+        icon.style.animation = '';
+        icon.innerHTML       = '<path d="M12 5v14M5 12l7 7 7-7"/>';
+        label.textContent    = 'Ver más';
+        btn.disabled         = false;
+
+        updateLoadMoreUI();
+        next[0]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 320);
+    }
+
+    btn.addEventListener('click', revealNext);
     applyFilters();
-  });
-
-  /* ─── Cargar más ──────────────────────────────────────────── */
-
-  function revealNext() {
-    btn.disabled      = true;
-    label.textContent = 'Cargando';
-    icon.innerHTML    = `<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83
-             M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>`;
-    icon.style.animation = 'spin 0.7s linear infinite';
-
-    setTimeout(() => {
-      const next = filtered.slice(shownCount, shownCount + BATCH);
-
-      next.forEach(item => {
-        item.removeAttribute('data-hidden');
-        item.setAttribute('data-entering', '');
-      });
-      requestAnimationFrame(() => {
-        next.forEach((item, i) => setTimeout(() => item.removeAttribute('data-entering'), i * 70));
-      });
-
-      shownCount = Math.min(shownCount + BATCH, filtered.length);
-
-      icon.style.animation = '';
-      icon.innerHTML       = '<path d="M12 5v14M5 12l7 7 7-7"/>';
-      label.textContent    = 'Ver más';
-      btn.disabled         = false;
-
-      updateLoadMoreUI();
-      next[0]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 320);
   }
 
-  /* ─── Init ────────────────────────────────────────────────── */
-
-  btn.addEventListener('click', revealNext);
-  applyFilters(); // arranca igual que un cambio de filtro
+  // Se ejecuta en carga inicial y en cada navegación con View Transitions
+  document.addEventListener('astro:page-load', setup);
 </script>
 
 <style is:global>
