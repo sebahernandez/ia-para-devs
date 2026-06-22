@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
 import { getCatClass } from '../utils/categories';
 
 interface Props {
@@ -23,6 +24,8 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   type="article"
   pubDate={data.pubDate}
 >
+  <ReadingProgress />
+
   <article class="mx-auto max-w-5xl px-6 pt-14 pb-20">
     <nav class="mb-10 text-sm">
       <a href="/blog/" class="link">

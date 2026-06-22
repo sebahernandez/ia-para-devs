@@ -64,7 +64,3 @@ Sin bola de cristal, pero las tendencias apuntan a:
 El segundo semestre de 2026 no será tan diferente del primero. La IA es una tecnología en desarrollo activo, no en revolución permanente. Los saltos grandes pasan cada 12-18 meses, no cada mes.
 
 Y eso es suficiente para que el sector siga siendo fascinante de seguir.
-
----
-
-*Balance editorial del equipo de Blog IA a junio de 2026.*

@@ -1,0 +1,126 @@
+---
+/**
+ * ReadingProgress.astro
+ * ─────────────────────────────────────────────────────────────
+ * Barra de progreso de lectura + chip con % y minutos restantes.
+ *
+ * El porcentaje permanece en 0% hasta que el lector realiza su
+ * primer scroll. En ese momento se captura la posición de
+ * partida (`startY`) y el progreso avanza de forma lineal hasta
+ * 100% al llegar al final de la página (scrollHeight − vh).
+ *
+ *   • Barra superior (top-0, z-50): siempre visible.
+ *   • Chip flotante (top-20, z-30): siempre visible; en mobile
+ *     se compacta a sólo el porcentaje.
+ *
+ * Eventos:
+ *   • scroll/resize → recalcula con rAF (throttling).
+ *   • astro:page-load → re-instala en cada navegación SPA.
+ */
+---
+
+<div
+  class="fixed inset-x-0 top-0 z-50 h-[3px] bg-ink-800/30 pointer-events-none"
+  aria-hidden="true"
+>
+  <div
+    id="reading-progress-bar"
+    class="h-full w-0 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-orange-400
+           shadow-[0_0_8px_rgb(0,229,255,0.45)]
+           transition-[width] duration-100 ease-out"
+  ></div>
+</div>
+
+<div
+  id="reading-progress-chip"
+  class="fixed right-3 top-[72px] z-30 inline-flex select-none items-center gap-2
+         rounded-full border border-ink-700 bg-ink-900/80 px-2.5 py-1
+         text-[11px] text-ink-200 shadow-lg backdrop-blur-md
+         sm:right-6 sm:gap-2.5 sm:px-3 sm:py-1.5 sm:text-xs"
+  role="status"
+  aria-live="polite"
+>
+  <span class="relative flex h-2 w-2 shrink-0">
+    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
+    <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+  </span>
+  <span id="reading-progress-percent" class="font-mono font-medium text-white tabular-nums">0%</span>
+  <span id="reading-progress-remaining" class="hidden font-mono text-ink-300 tabular-nums sm:inline">— min</span>
+</div>
+
+<script>
+  const WPM = 220;
+  let cleanup: (() => void) | null = null;
+
+  function setup() {
+    cleanup?.();
+
+    const bar = document.getElementById('reading-progress-bar');
+    const percentEl = document.getElementById('reading-progress-percent');
+    const remainingEl = document.getElementById('reading-progress-remaining');
+    const articleEl = document.querySelector<HTMLElement>('article');
+    if (!bar || !percentEl || !remainingEl || !articleEl) return;
+
+    const words = ((articleEl.textContent || '').trim().match(/\S+/g) || []).length;
+    const totalMinutes = Math.max(1, Math.ceil(words / WPM));
+    remainingEl.textContent = `~${totalMinutes} min`;
+
+    let hasStarted = false;
+    let startY = 0;
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const scrollY = window.scrollY || 0;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
+
+      // Página sin scroll posible: contenido ya visible al 100%.
+      if (maxScroll <= 0) {
+        bar.style.width = '100%';
+        percentEl.textContent = '100%';
+        remainingEl.textContent = 'Finalizado';
+        return;
+      }
+
+      // Primer scroll real del lector: fija el origen de la lectura.
+      if (!hasStarted && scrollY > 0) {
+        hasStarted = true;
+        startY = scrollY;
+      }
+
+      let progress: number;
+      if (!hasStarted) {
+        progress = 0;
+      } else if (scrollY >= maxScroll) {
+        progress = 1;
+      } else {
+        const range = Math.max(1, maxScroll - startY);
+        progress = Math.max(0, Math.min(1, (scrollY - startY) / range));
+      }
+
+      const pct = Math.round(progress * 100);
+      bar.style.width = `${pct}%`;
+      percentEl.textContent = `${pct}%`;
+
+      const remaining = Math.max(0, Math.ceil(totalMinutes * (1 - progress)));
+      remainingEl.textContent = remaining <= 0 ? 'Finalizado' : `~${remaining} min`;
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    cleanup = () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>
