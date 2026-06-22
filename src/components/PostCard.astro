@@ -22,10 +22,12 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
 ---
 
 <article
-  class={`group relative flex flex-col rounded-xl border border-ink-800
-          bg-ink-900/40 p-6 transition-all duration-300
-          hover:border-ink-600 hover:bg-ink-900/70
-          ${featured ? 'md:p-8' : ''}`}
+  class={`group relative flex flex-col rounded-xl border bg-ink-900/40 p-6
+          transition-all duration-300 hover:bg-ink-900/70
+          ${featured
+            ? 'md:p-8 featured-card'
+            : 'border-ink-800 hover:border-ink-600'
+          }`}
 >
   <div class="flex items-center gap-3 text-xs text-ink-400">
     <span class={`font-mono uppercase tracking-widest ${getCatClass(data.category)}`}>
@@ -70,3 +72,73 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
     </span>
   </div>
 </article>
+
+<style>
+  /* ─── Featured card ───────────────────────────────────────
+     Tratamiento visual sutil para el post destacado. La
+     diferenciación se apoya en tres capas de baja intensidad:
+     1. Borde ligeramente más visible que el resto de cards.
+     2. Gradiente diagonal muy tenue en el fondo (efecto "lit").
+     3. Línea de acento superior de 1px con los colores
+        signature del sitio (cyan → fuchsia) recortada con
+        fade en los extremos.
+     Todo se atenúa en modo claro con tonos más oscuros para
+     mantener el contraste sobre fondo blanco.
+  ─────────────────────────────────────────────────────────── */
+  .featured-card {
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.035) 0%,
+      rgb(255 255 255 / 0.015) 50%,
+      transparent 100%
+    );
+    border-color: rgb(255 255 255 / 0.09);
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.03),
+      0 10px 30px -16px rgb(0 0 0 / 0.6);
+  }
+  .featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(0 229 255 / 0.65) 35%,
+      rgb(224 64 251 / 0.65) 65%,
+      transparent 100%
+    );
+    transition: opacity 0.3s ease;
+  }
+  .featured-card:hover {
+    border-color: rgb(255 255 255 / 0.14);
+  }
+
+  :global(html.light) .featured-card {
+    background-image: linear-gradient(
+      135deg,
+      rgb(0 0 0 / 0.025) 0%,
+      rgb(0 0 0 / 0.008) 50%,
+      transparent 100%
+    );
+    border-color: rgb(0 0 0 / 0.1);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.04),
+      0 10px 30px -16px rgb(0 0 0 / 0.1);
+  }
+  :global(html.light) .featured-card::before {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(0 151 167 / 0.55) 35%,
+      rgb(123 31 162 / 0.55) 65%,
+      transparent 100%
+    );
+  }
+  :global(html.light) .featured-card:hover {
+    border-color: rgb(0 0 0 / 0.18);
+  }
+</style>
