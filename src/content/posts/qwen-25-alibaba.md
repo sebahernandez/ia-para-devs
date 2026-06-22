@@ -2,7 +2,6 @@
 title: "Qwen 2.5: Alibaba publica modelos que compiten en multilingüe y código"
 description: "La familia Qwen 2.5 de Alibaba incluye variantes especializadas en código y matemáticas, con soporte sobresaliente para idiomas asiáticos y rendimiento competitivo en benchmarks occidentales."
 pubDate: 2025-05-20
-author: "Equipo Blog IA"
 tags: ["alibaba", "qwen", "multilingüe", "open-weights"]
 category: modelos
 ---

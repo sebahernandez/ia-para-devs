@@ -2,7 +2,6 @@
 title: "Qué le pasa a tu código cuando se lo envías a ChatGPT o Claude"
 description: "Las políticas de uso de datos de OpenAI, Anthropic y Google son distintas entre sí y no siempre fáciles de entender. Resumen de lo que saben y lo que hacen con los datos que envías a sus APIs."
 pubDate: 2025-10-25
-author: "Equipo Blog IA"
 tags: ["privacidad", "datos", "compliance", "seguridad"]
 category: opinión
 ---

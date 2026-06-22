@@ -2,7 +2,6 @@
 title: "2025 en IA: el año en que el razonamiento dejó de ser un truco"
 description: "Repaso honesto de lo que pasó en IA durante 2025: qué prometió y cumplió, qué prometió y no cumplió, y qué tendencias van a definir 2026."
 pubDate: 2025-12-26
-author: "Equipo Blog IA"
 tags: ["resumen", "2025", "tendencias", "opinión"]
 category: opinión
 ---

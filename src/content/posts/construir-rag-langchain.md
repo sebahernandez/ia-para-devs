@@ -2,7 +2,6 @@
 title: "Construir un sistema RAG con LangChain en Python: de cero a producción"
 description: "Tutorial completo para construir recuperación aumentada generativa. Cargamos documentos, generamos embeddings, indexamos en Chroma y construimos la cadena de QA. Con variantes para escalar a producción."
 pubDate: 2025-07-28
-author: "Equipo Blog IA"
 tags: ["langchain", "rag", "python", "tutorial"]
 category: tutorial
 ---

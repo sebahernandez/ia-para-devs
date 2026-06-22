@@ -2,7 +2,6 @@
 title: "El estado de la IA en junio de 2026: un balance honesto"
 description: "A mitad de año, hacemos balance de lo que cambió, lo que prometió y no cumplió, y dónde estamos realmente en el desarrollo de la inteligencia artificial."
 pubDate: 2026-06-20
-author: "Equipo Blog IA"
 tags: ["balance", "2026", "estado", "investigacion"]
 category: investigacion
 ---

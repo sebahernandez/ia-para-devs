@@ -2,7 +2,6 @@
 title: "DeepSeek V3: el modelo chino que sacudió los rankings de enero"
 description: "DeepSeek V3 llegó con un rendimiento que compite directamente con GPT-4o y Claude 3.5 Sonnet, a un coste de entrenamiento que desafía las asunciones del sector."
 pubDate: 2026-01-07
-author: "Equipo Blog IA"
 tags: ["deepseek", "modelos", "china", "open-source"]
 category: modelos
 ---

@@ -2,7 +2,6 @@
 title: "Streaming de LLMs en aplicaciones web: implementación completa con SSE y React"
 description: "Los streams transforman la experiencia de usuario al mostrar texto mientras se genera. Guía de implementación en el backend (Node.js) y frontend (React) usando Server-Sent Events con OpenAI y Anthropic."
 pubDate: 2025-11-22
-author: "Equipo Blog IA"
 tags: ["streaming", "react", "sse", "tutorial"]
 category: tutorial
 ---

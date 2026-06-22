@@ -2,7 +2,6 @@
 title: "El futuro no son los modelos más grandes. Son los más eficientes."
 description: "La carrera por el modelo más grande empieza a dar paso a una competencia por la eficiencia. Phi-3, Gemma 2 y las destilaciones de DeepSeek apuntan a un futuro donde el tamaño importa menos que la calidad del entrenamiento."
 pubDate: 2025-09-22
-author: "Equipo Blog IA"
 tags: ["opinión", "modelos-pequeños", "eficiencia", "destilación"]
 category: opinión
 ---

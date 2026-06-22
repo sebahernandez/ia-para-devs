@@ -2,7 +2,6 @@
 title: "Cómo evaluar LLMs para tu caso de uso: más allá de los benchmarks públicos"
 description: "Los benchmarks públicos son útiles pero no dicen nada sobre si un modelo funciona para tu problema específico. Metodología práctica para evaluar modelos con tus propios datos."
 pubDate: 2026-01-31
-author: "Equipo Blog IA"
 tags: ["evaluación", "benchmarks", "metodología", "llms"]
 category: investigacion
 ---

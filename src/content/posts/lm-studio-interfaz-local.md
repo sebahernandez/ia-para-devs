@@ -2,7 +2,6 @@
 title: "LM Studio: la interfaz gráfica para correr LLMs en local sin tocar la terminal"
 description: "LM Studio ofrece una alternativa a Ollama con interfaz gráfica: descarga modelos desde HuggingFace, los gestiona y expone una API local compatible con OpenAI. Ideal para quien no quiere configurar nada manualmente."
 pubDate: 2025-05-28
-author: "Equipo Blog IA"
 tags: ["lm-studio", "local-llm", "self-hosted", "herramientas"]
 category: herramientas
 ---

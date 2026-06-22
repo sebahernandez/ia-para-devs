@@ -2,7 +2,6 @@
 title: "OpenAI Codex (2026): el agente de código que trabaja en segundo plano"
 description: "OpenAI relanzó Codex como un agente de código asíncrono que puede trabajar en tareas largas sin supervisión. Qué puede hacer, cuáles son sus límites, y cómo encaja con otras herramientas."
 pubDate: 2026-05-27
-author: "Equipo Blog IA"
 tags: ["codex", "openai", "agentes", "código"]
 category: herramientas
 ---

@@ -2,7 +2,6 @@
 title: "Mistral Large 2: el modelo europeo que no pide disculpas por competir con los grandes"
 description: "Mistral AI lanzó Large 2 con 123B parámetros, ventana de 128K tokens y rendimiento que rivaliza con GPT-4o. Disponible como pesos descargables y como API, con enfoque en idiomas europeos."
 pubDate: 2025-03-05
-author: "Equipo Blog IA"
 tags: ["mistral", "europa", "llm", "open-weights"]
 category: modelos
 ---

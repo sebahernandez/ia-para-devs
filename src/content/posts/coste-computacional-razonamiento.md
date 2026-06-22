@@ -2,7 +2,6 @@
 title: "El coste real del razonamiento extendido: cuándo pagar más vale la pena"
 description: "Los modelos de razonamiento como o3 y Claude Extended Thinking cuestan mucho más que los modelos estándar. Análisis de cuándo el coste adicional se justifica con mejoras reales de calidad."
 pubDate: 2026-04-17
-author: "Equipo Blog IA"
 tags: ["razonamiento", "costes", "o3", "optimización"]
 category: investigacion
 ---

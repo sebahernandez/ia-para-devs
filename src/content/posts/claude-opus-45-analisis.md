@@ -2,7 +2,6 @@
 title: "Claude Opus 4.5: el modelo de Anthropic para razonamiento de frontera"
 description: "Anthropic actualizó su línea Opus con Claude 4.5, apostando por capacidades de razonamiento extendido y rendimiento en tareas complejas. Análisis completo y casos de uso."
 pubDate: 2026-05-03
-author: "Equipo Blog IA"
 tags: ["claude", "opus", "anthropic", "razonamiento"]
 category: modelos
 ---

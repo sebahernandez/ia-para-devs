@@ -2,7 +2,6 @@
 title: "Gemini 2.5 Pro: el modelo que cambió mi opinión sobre Google"
 description: "Gemini 2.5 Pro llegó con razonamiento nativo, 1M de contexto por defecto, y resultados en código que por primera vez hacen a Google competitivo con Anthropic y OpenAI en uso real."
 pubDate: 2026-04-01
-author: "Equipo Blog IA"
 tags: ["gemini", "google", "razonamiento", "modelos"]
 category: modelos
 ---

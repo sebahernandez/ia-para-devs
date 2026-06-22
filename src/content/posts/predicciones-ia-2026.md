@@ -2,7 +2,6 @@
 title: "Lo que 2026 tiene preparado para los developers que trabajan con IA"
 description: "Agentes más autónomos, modelos multimodales más capaces, y la consolidación del mercado de herramientas. Sin bola de cristal, pero con los indicadores que ya están sobre la mesa."
 pubDate: 2025-12-01
-author: "Equipo Blog IA"
 tags: ["opinión", "predicciones", "2026", "tendencias"]
 category: opinión
 ---

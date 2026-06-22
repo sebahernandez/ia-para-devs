@@ -2,7 +2,6 @@
 title: "Mixture of Experts: por qué Mixtral y GPT-4 son más eficientes de lo que parecen"
 description: "La arquitectura MoE activa solo una fracción de los parámetros del modelo en cada inferencia. Eso permite modelos enormes que cuestan como modelos pequeños. Explicamos el mecanismo y sus implicaciones."
 pubDate: 2025-03-02
-author: "Equipo Blog IA"
 tags: ["moe", "arquitectura", "mixtral", "eficiencia"]
 category: investigacion
 ---

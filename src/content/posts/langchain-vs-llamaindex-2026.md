@@ -2,7 +2,6 @@
 title: "LangChain vs LlamaIndex en 2026: cuál usar para tu proyecto RAG"
 description: "Dos años después de que ambos frameworks dominaran el ecosistema RAG, el panorama cambió. LangChain se diversificó, LlamaIndex se especializó. Cómo elegir según tu caso."
 pubDate: 2026-02-24
-author: "Equipo Blog IA"
 tags: ["langchain", "llamaindex", "rag", "herramientas"]
 category: herramientas
 ---

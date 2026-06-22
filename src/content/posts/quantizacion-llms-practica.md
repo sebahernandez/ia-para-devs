@@ -2,7 +2,6 @@
 title: "Cuantización de LLMs en la práctica: GGUF, GPTQ, AWQ y cuándo usar cada uno"
 description: "Ejecutar modelos grandes en hardware modesto requiere cuantización. Comparamos los formatos más usados con resultados concretos de calidad y velocidad."
 pubDate: 2026-02-12
-author: "Equipo Blog IA"
 tags: ["cuantización", "gguf", "gptq", "llms-local", "tutorial"]
 category: tutorial
 ---

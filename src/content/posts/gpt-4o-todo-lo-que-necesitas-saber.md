@@ -2,7 +2,6 @@
 title: "GPT-4o: multimodal nativo y el fin de los modelos separados de OpenAI"
 description: "OpenAI fusionó texto, audio e imagen en un solo modelo con GPT-4o. Repaso de qué significa esto para el desarrollo de aplicaciones y dónde sigue siendo la mejor opción."
 pubDate: 2025-01-28
-author: "Equipo Blog IA"
 tags: ["openai", "gpt-4o", "multimodal", "api"]
 category: modelos
 ---

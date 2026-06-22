@@ -2,7 +2,6 @@
 title: "Constitutional AI: cómo Anthropic entrena modelos para alinearse con principios sin feedback humano exhaustivo"
 description: "CAI es la técnica de Anthropic para reducir comportamientos dañinos usando al propio modelo como crítico. Explicamos el mecanismo y por qué importa para quienes construyen aplicaciones con LLMs."
 pubDate: 2025-02-18
-author: "Equipo Blog IA"
 tags: ["anthropic", "alineamiento", "constitutional-ai", "seguridad"]
 category: investigacion
 ---

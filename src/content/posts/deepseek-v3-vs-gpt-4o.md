@@ -2,7 +2,6 @@
 title: "DeepSeek V3 vs GPT-4o: la competencia que nadie esperaba"
 description: "DeepSeek V3 compite directamente con GPT-4o en benchmarks y lo supera en algunos. Con acceso open source y coste de inferencia inferior, cambia el mapa de proveedores de LLMs."
 pubDate: 2026-04-21
-author: "Equipo Blog IA"
 tags: ["deepseek", "gpt-4o", "comparativa", "open-source"]
 category: modelos
 ---

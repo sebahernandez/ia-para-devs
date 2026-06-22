@@ -2,7 +2,6 @@
 title: "Agentes de IA: arquitecturas que funcionan en producción (y las que no)"
 description: "El concepto de agente de IA existe desde hace años, pero las implementaciones prácticas que realmente funcionan son pocas. Repasamos los patrones que están dando resultados y los antipatrones más comunes."
 pubDate: 2025-05-15
-author: "Equipo Blog IA"
 tags: ["agentes", "arquitectura", "llm", "producción"]
 category: investigacion
 ---

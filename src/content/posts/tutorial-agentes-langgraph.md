@@ -2,7 +2,6 @@
 title: "Tutorial: construye un agente de investigación con LangGraph"
 description: "LangGraph es el framework más maduro para agentes con estado. Construimos un agente que busca información, la evalúa, y decide si necesita más investigación antes de responder."
 pubDate: 2026-04-13
-author: "Equipo Blog IA"
 tags: ["langgraph", "agentes", "tutorial", "python"]
 category: tutorial
 ---

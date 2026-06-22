@@ -2,7 +2,6 @@
 title: "Qwen 3 de Alibaba: el modelo que redefine las expectativas del open source"
 description: "Qwen 3 llegó con una familia completa de modelos desde 0.6B hasta 235B, razonamiento nativo, y rendimiento que compite directamente con los mejores modelos cerrados. Análisis completo."
 pubDate: 2026-06-04
-author: "Equipo Blog IA"
 tags: ["qwen", "alibaba", "open-source", "modelos"]
 category: modelos
 ---

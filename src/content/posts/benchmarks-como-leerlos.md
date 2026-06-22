@@ -2,7 +2,6 @@
 title: "Cómo leer los benchmarks de LLMs sin dejarte engañar por los números"
 description: "MMLU, HumanEval, GPQA, MT-Bench, LMSYS Arena: cada benchmark mide algo diferente y tiene sus propias trampas. Una guía para interpretar los resultados antes de elegir un modelo."
 pubDate: 2025-06-01
-author: "Equipo Blog IA"
 tags: ["benchmarks", "evaluación", "llm", "metodología"]
 category: investigacion
 ---

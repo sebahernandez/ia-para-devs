@@ -2,7 +2,6 @@
 title: "Prompt caching en Anthropic: cómo ahorrar 90% en costes con contexto estático"
 description: "El caching de Anthropic permite reutilizar contexto largo entre llamadas. Guía de implementación con TypeScript para system prompts, documentos de referencia y herramientas definidas."
 pubDate: 2025-08-28
-author: "Equipo Blog IA"
 tags: ["anthropic", "optimización", "costes", "tutorial"]
 category: tutorial
 ---

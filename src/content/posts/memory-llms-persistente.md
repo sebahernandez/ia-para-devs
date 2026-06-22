@@ -2,7 +2,6 @@
 title: "Memoria persistente en LLMs: el problema que nadie ha resuelto bien todavía"
 description: "Los LLMs olvidan todo al terminar cada conversación. Varias aproximaciones intentan resolver esto con resultados muy dispares. Estado del arte y qué funciona en producción."
 pubDate: 2026-06-08
-author: "Equipo Blog IA"
 tags: ["memoria", "persistencia", "agentes", "investigacion"]
 category: investigacion
 ---

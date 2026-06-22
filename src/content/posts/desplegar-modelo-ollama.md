@@ -2,7 +2,6 @@
 title: "Desplegar un modelo con Ollama en un servidor Linux: guía de producción"
 description: "Ollama en tu laptop funciona bien para desarrollo. Para un servidor compartido con varios usuarios o para integrarlo en una aplicación, hay configuración extra necesaria. Esta guía cubre el setup completo."
 pubDate: 2025-12-10
-author: "Equipo Blog IA"
 tags: ["ollama", "deployment", "linux", "self-hosted"]
 category: tutorial
 ---

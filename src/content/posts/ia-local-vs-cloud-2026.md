@@ -2,7 +2,6 @@
 title: "IA local vs cloud en 2026: cuándo tiene sentido cada opción"
 description: "Los modelos locales son más capaces que nunca y la brecha con los modelos cloud se reduce. ¿Cuándo tiene sentido ejecutar modelos en tu hardware y cuándo pagar por API?"
 pubDate: 2026-06-12
-author: "Equipo Blog IA"
 tags: ["local", "cloud", "privacidad", "costes", "opinión"]
 category: opinión
 ---

@@ -2,7 +2,6 @@
 title: "Cursor: el editor que convirtió la IA en parte del entorno de desarrollo"
 description: "Cursor es un fork de VS Code con integración nativa de LLMs. Más que un plugin, cambia el modelo mental de cómo interactuar con el código. Repasamos qué lo diferencia de GitHub Copilot y cuándo merece el cambio."
 pubDate: 2025-02-05
-author: "Equipo Blog IA"
 tags: ["cursor", "ide", "developer-tools", "productividad"]
 category: herramientas
 ---

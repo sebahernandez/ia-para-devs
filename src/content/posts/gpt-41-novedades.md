@@ -2,7 +2,6 @@
 title: "GPT-4.1: lo que OpenAI mejoró y lo que no"
 description: "OpenAI actualizó su modelo principal con GPT-4.1. Mejor en código, instrucciones largas, y coste reducido. Analizamos los cambios reales y si justifican migrar desde GPT-4o."
 pubDate: 2026-03-16
-author: "Equipo Blog IA"
 tags: ["gpt-4.1", "openai", "modelos", "código"]
 category: modelos
 ---

@@ -2,7 +2,6 @@
 title: "Cómo implementar tool use con Claude: guía práctica de function calling"
 description: "Tool use permite que Claude invoque funciones definidas por ti para obtener información externa o ejecutar acciones. Implementación completa con TypeScript, manejo del ciclo de herramientas y patrones de error."
 pubDate: 2025-11-05
-author: "Equipo Blog IA"
 tags: ["anthropic", "tool-use", "agentes", "tutorial"]
 category: tutorial
 ---

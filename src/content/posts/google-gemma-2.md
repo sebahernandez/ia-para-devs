@@ -2,7 +2,6 @@
 title: "Gemma 2: los modelos ligeros de Google que corren en tu laptop"
 description: "Google publicó Gemma 2 con variantes de 2B, 9B y 27B parámetros. El modelo de 9B supera a Llama 3 8B en benchmarks clave y corre en consumer hardware sin grandes concesiones."
 pubDate: 2025-04-02
-author: "Equipo Blog IA"
 tags: ["google", "gemma", "on-device", "open-weights"]
 category: modelos
 ---

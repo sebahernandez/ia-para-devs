@@ -2,7 +2,6 @@
 title: "Gemini 2.0: Google apuesta fuerte por los agentes multimodales"
 description: "Gemini 2.0 Flash y Pro cambian el enfoque de Google: menos competir en benchmarks generales, más habilitar flujos de trabajo agénticos con capacidades nativas de audio y video."
 pubDate: 2026-02-04
-author: "Equipo Blog IA"
 tags: ["gemini", "google", "multimodal", "agentes"]
 category: modelos
 ---

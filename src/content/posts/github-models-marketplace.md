@@ -2,7 +2,6 @@
 title: "GitHub Models: probar LLMs directamente desde tu repositorio"
 description: "GitHub integró un marketplace de modelos donde puedes experimentar con GPT-4o, Llama 3 y otros directamente desde github.com, con créditos gratuitos para desarrollo y una API unificada."
 pubDate: 2025-03-25
-author: "Equipo Blog IA"
 tags: ["github", "modelos", "api", "developer-tools"]
 category: herramientas
 ---

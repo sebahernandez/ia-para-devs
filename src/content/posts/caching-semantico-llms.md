@@ -2,7 +2,6 @@
 title: "Caching semántico para LLMs: reduce costes un 40-60% en aplicaciones de producción"
 description: "El caching estándar no funciona con LLMs porque las queries son siempre ligeramente diferentes. El caching semántico detecta queries similares y reutiliza respuestas. Cómo implementarlo."
 pubDate: 2026-03-28
-author: "Equipo Blog IA"
 tags: ["caching", "costes", "producción", "optimización"]
 category: investigacion
 ---

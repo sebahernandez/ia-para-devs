@@ -2,7 +2,6 @@
 title: "Grok 3 de xAI: lo que cambia respecto a la competencia"
 description: "xAI lanzó Grok 3 con capacidades de razonamiento extendido y acceso a datos de X en tiempo real. Analizamos qué lo diferencia y cuándo tiene sentido usarlo."
 pubDate: 2025-12-09
-author: "Equipo Blog IA"
 tags: ["grok", "xai", "modelos", "razonamiento"]
 category: modelos
 ---

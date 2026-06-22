@@ -2,7 +2,6 @@
 title: "Predicciones para IA en 2026: lo que creemos que va a pasar"
 description: "Predicciones concretas y verificables sobre el estado de la IA en 2026: modelos, herramientas, regulación y el mercado. Sin hype, con razones."
 pubDate: 2025-12-30
-author: "Equipo Blog IA"
 tags: ["predicciones", "2026", "tendencias", "futuro"]
 category: opinión
 ---

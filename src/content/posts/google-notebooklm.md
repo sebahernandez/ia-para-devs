@@ -2,7 +2,6 @@
 title: "NotebookLM: Google crea la herramienta de investigación con IA que tiene sentido usar"
 description: "NotebookLM deja subir tus propios documentos y hace preguntas sobre ellos con contexto real. El modo Audio Overviews que genera podcasts a partir de PDFs fue inesperadamente viral. Repasamos qué hace bien."
 pubDate: 2025-06-12
-author: "Equipo Blog IA"
 tags: ["google", "notebooklm", "rag", "productividad"]
 category: herramientas
 ---

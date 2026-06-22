@@ -2,7 +2,6 @@
 title: "Fine-tuning vs RAG: cómo elegir según tu caso de uso real"
 description: "La pregunta más frecuente al personalizar LLMs. No hay una respuesta universal, pero hay un framework claro para decidir. Cuándo cada enfoque gana y cuándo combinarlos."
 pubDate: 2026-04-29
-author: "Equipo Blog IA"
 tags: ["fine-tuning", "rag", "arquitectura", "opinión"]
 category: opinión
 ---

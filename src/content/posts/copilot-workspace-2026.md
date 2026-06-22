@@ -2,7 +2,6 @@
 title: "GitHub Copilot Workspace en 2026: del issue al PR sin tocar el editor"
 description: "GitHub Copilot Workspace prometió transformar cómo trabajamos con issues. Después de un año en disponibilidad general, evaluamos qué funciona y cuál es el caso de uso real."
 pubDate: 2026-04-25
-author: "Equipo Blog IA"
 tags: ["copilot", "github", "agentes", "herramientas"]
 category: herramientas
 ---

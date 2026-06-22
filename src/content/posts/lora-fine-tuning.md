@@ -2,7 +2,6 @@
 title: "LoRA y QLoRA: cómo hacer fine-tuning de LLMs sin necesitar un datacenter"
 description: "Low-Rank Adaptation permite adaptar modelos grandes a dominios específicos entrenando menos del 1% de sus parámetros. Con QLoRA, cabe en una sola GPU de consumo. Aquí el estado del arte práctico."
 pubDate: 2025-02-01
-author: "Equipo Blog IA"
 tags: ["fine-tuning", "lora", "qlora", "entrenamiento"]
 category: investigacion
 ---

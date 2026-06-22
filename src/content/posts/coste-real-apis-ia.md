@@ -2,7 +2,6 @@
 title: "El coste real de las APIs de IA en producción: lo que nadie te cuenta antes"
 description: "Los precios por millón de tokens son fáciles de encontrar. Lo que no es tan obvio: el coste del contexto largo, el caching, los tokens de razonamiento ocultos y cómo los patrones de uso real difieren de los ejemplos del playground."
 pubDate: 2025-08-20
-author: "Equipo Blog IA"
 tags: ["costes", "api", "producción", "optimización"]
 category: opinión
 ---

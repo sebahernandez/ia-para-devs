@@ -2,7 +2,6 @@
 title: "Windsurf vs Cursor: el nuevo competidor que complica la elección"
 description: "Windsurf (de Codeium) entró al mercado de editores de IA con una propuesta diferente a Cursor. Comparamos ambos después de un mes de uso real."
 pubDate: 2026-01-19
-author: "Equipo Blog IA"
 tags: ["windsurf", "cursor", "herramientas", "editores"]
 category: herramientas
 ---

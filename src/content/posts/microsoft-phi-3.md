@@ -2,7 +2,6 @@
 title: "Phi-3 de Microsoft: cuando un modelo pequeño hace el trabajo de uno grande"
 description: "Microsoft publicó Phi-3 Mini con 3.8B parámetros y rendimiento de modelo mediano. El experimento demuestra que la calidad de los datos de entrenamiento puede compensar el tamaño del modelo."
 pubDate: 2025-04-15
-author: "Equipo Blog IA"
 tags: ["microsoft", "phi-3", "small-models", "eficiencia"]
 category: modelos
 ---

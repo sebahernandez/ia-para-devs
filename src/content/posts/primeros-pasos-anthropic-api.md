@@ -2,7 +2,6 @@
 title: "Primeros pasos con la API de Anthropic: de cero a tu primera llamada en 10 minutos"
 description: "Guía práctica para usar la API de Claude desde TypeScript o Python. Cuenta, instalación, primera llamada, streaming y manejo de errores. Todo lo que necesitas para empezar."
 pubDate: 2025-07-10
-author: "Equipo Blog IA"
 tags: ["anthropic", "api", "tutorial", "typescript"]
 category: tutorial
 ---

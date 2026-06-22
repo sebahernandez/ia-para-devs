@@ -2,7 +2,6 @@
 title: "Guía práctica de Extended Thinking: patrones de uso y antipatrones"
 description: "Después de implementar Extended Thinking en varios proyectos, compilamos los patrones que funcionan y los errores que más se cometen al integrarlo en aplicaciones de producción."
 pubDate: 2026-03-08
-author: "Equipo Blog IA"
 tags: ["extended-thinking", "claude", "tutorial", "producción"]
 category: tutorial
 ---

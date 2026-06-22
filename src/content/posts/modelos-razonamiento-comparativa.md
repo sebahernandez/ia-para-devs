@@ -2,7 +2,6 @@
 title: "Comparativa de modelos de razonamiento en mayo 2026: o3, Claude, Gemini"
 description: "Los modelos de razonamiento extendido ya son varios. Comparamos o3, Claude 3.7 con Extended Thinking, y Gemini 2.5 Pro en tareas reales para ayudarte a elegir."
 pubDate: 2026-05-15
-author: "Equipo Blog IA"
 tags: ["razonamiento", "comparativa", "o3", "claude", "gemini"]
 category: investigacion
 ---

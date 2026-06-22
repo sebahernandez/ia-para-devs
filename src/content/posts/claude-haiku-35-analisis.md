@@ -2,7 +2,6 @@
 title: "Claude 3.5 Haiku: el modelo más rápido de Anthropic y cuándo usarlo"
 description: "Claude 3.5 Haiku llegó para llenar el hueco entre velocidad y calidad en la línea de Anthropic. Benchmarks, casos de uso, y comparación con GPT-4o mini."
 pubDate: 2026-01-11
-author: "Equipo Blog IA"
 tags: ["claude", "haiku", "modelos", "velocidad"]
 category: modelos
 ---

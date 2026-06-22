@@ -2,7 +2,6 @@
 title: "o3 de OpenAI: el salto de razonamiento que nadie esperaba tan pronto"
 description: "o3 supera a o1 en todos los benchmarks relevantes y alcanza rendimiento humano experto en tareas de ciencia. Qué significa esto y qué limitaciones tiene."
 pubDate: 2025-12-21
-author: "Equipo Blog IA"
 tags: ["o3", "openai", "razonamiento", "benchmarks"]
 category: modelos
 ---

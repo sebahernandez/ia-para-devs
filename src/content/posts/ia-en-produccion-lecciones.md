@@ -2,7 +2,6 @@
 title: "Lo que aprendimos desplegando LLMs en producción durante 18 meses"
 description: "Lecciones no evidentes de operar sistemas con LLMs en producción: los problemas que nadie documenta, los patrones que funcionan, y los errores que más se repiten."
 pubDate: 2026-05-07
-author: "Equipo Blog IA"
 tags: ["producción", "lecciones", "ingeniería", "opinión"]
 category: opinión
 ---

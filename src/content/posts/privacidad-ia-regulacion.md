@@ -2,7 +2,6 @@
 title: "IA y privacidad en 2026: lo que la regulación ya exige y lo que viene"
 description: "La EU AI Act está en vigor. El debate sobre privacidad en LLMs ya no es teórico. Qué tienen que hacer los desarrolladores hoy y qué cambios regulatorios vienen."
 pubDate: 2026-05-31
-author: "Equipo Blog IA"
 tags: ["privacidad", "regulación", "eu-ai-act", "compliance"]
 category: opinión
 ---

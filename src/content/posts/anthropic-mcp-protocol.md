@@ -2,7 +2,6 @@
 title: "Model Context Protocol: el estándar abierto que Anthropic propuso para conectar LLMs con herramientas"
 description: "MCP define cómo los modelos de lenguaje se conectan con fuentes de datos, herramientas externas y sistemas. Anthropic lo publicó como estándar abierto y varios proveedores lo están adoptando."
 pubDate: 2025-05-10
-author: "Equipo Blog IA"
 tags: ["anthropic", "mcp", "agentes", "integraciones"]
 category: herramientas
 ---

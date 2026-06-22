@@ -2,7 +2,6 @@
 title: "Reranking con ColBERT: cómo mejorar la precisión de tu RAG sin cambiar los embeddings"
 description: "El reranking es el paso más fácil de olvidar en un pipeline RAG y el que más mejora los resultados. ColBERT ofrece la mejor relación calidad-velocidad. Tutorial completo."
 pubDate: 2026-01-23
-author: "Equipo Blog IA"
 tags: ["rag", "colbert", "reranking", "tutorial"]
 category: tutorial
 ---

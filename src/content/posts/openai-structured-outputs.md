@@ -2,7 +2,6 @@
 title: "Structured Outputs de OpenAI: JSON garantizado sin parsear texto libre"
 description: "Con Structured Outputs, GPT-4o puede garantizar que su salida se ajuste exactamente a un schema JSON. Cómo implementarlo, cuándo usarlo y qué diferencia hay con el modo JSON anterior."
 pubDate: 2025-07-28
-author: "Equipo Blog IA"
 tags: ["openai", "structured-outputs", "json", "tutorial"]
 category: tutorial
 ---

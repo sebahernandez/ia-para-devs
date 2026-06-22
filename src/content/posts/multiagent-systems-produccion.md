@@ -2,7 +2,6 @@
 title: "Sistemas multiagente en producción: patrones que funcionan y los que fallan"
 description: "Los sistemas con múltiples agentes de IA coordinándose son complejos de operar. Después de varios deployments, estos son los patrones arquitectónicos que sobreviven al contacto con producción."
 pubDate: 2026-06-16
-author: "Equipo Blog IA"
 tags: ["multiagente", "arquitectura", "producción", "tutorial"]
 category: tutorial
 ---

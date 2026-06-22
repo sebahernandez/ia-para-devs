@@ -2,7 +2,6 @@
 title: "Ventanas de contexto largas vs RAG: no es una elección binaria"
 description: "Con modelos que aceptan 1M de tokens, ¿sigue teniendo sentido construir pipelines de RAG? La respuesta depende del caso de uso. Aquí el análisis técnico honesto."
 pubDate: 2025-06-18
-author: "Equipo Blog IA"
 tags: ["context-window", "rag", "arquitectura", "gemini"]
 category: investigacion
 ---

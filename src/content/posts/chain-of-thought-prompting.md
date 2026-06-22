@@ -2,7 +2,6 @@
 title: "Chain-of-Thought: la técnica de prompting que cambió qué podemos pedirle a un LLM"
 description: "Pedir al modelo que 'piense paso a paso' mejora drásticamente los resultados en problemas de razonamiento. Explicamos por qué funciona, las variantes más efectivas y cuándo no es la herramienta adecuada."
 pubDate: 2025-06-18
-author: "Equipo Blog IA"
 tags: ["prompting", "chain-of-thought", "razonamiento", "técnicas"]
 category: investigacion
 ---

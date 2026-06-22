@@ -2,7 +2,6 @@
 title: "Modelos multimodales en 2025: qué puede hacer realmente la visión por IA"
 description: "Los LLMs con capacidad visual ya no son novedad, pero sus capacidades reales varían mucho. Repasamos qué funciona bien en visión, dónde fallan todavía y las arquitecturas que lo hacen posible."
 pubDate: 2025-04-25
-author: "Equipo Blog IA"
 tags: ["multimodal", "visión", "gpt-4v", "llava"]
 category: investigacion
 ---

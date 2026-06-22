@@ -2,7 +2,6 @@
 title: "Late Chunking: por qué el chunking tradicional rompe el contexto de tus embeddings"
 description: "El chunking estándar para RAG destruye el contexto entre fragmentos. Late chunking es una técnica reciente que preserva el contexto al nivel correcto. Cómo funciona y cómo implementarla."
 pubDate: 2026-01-15
-author: "Equipo Blog IA"
 tags: ["rag", "embeddings", "late-chunking", "tutorial"]
 category: investigacion
 ---

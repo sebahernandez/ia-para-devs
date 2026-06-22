@@ -2,7 +2,6 @@
 title: "OpenAI o1: pensar antes de responder y lo que eso significa para los devs"
 description: "o1 es el primer modelo de OpenAI que genera una cadena de razonamiento interna antes de responder. Cambia la relación coste-calidad para problemas complejos y exige replantear cómo se hacen los prompts."
 pubDate: 2025-05-01
-author: "Equipo Blog IA"
 tags: ["openai", "o1", "razonamiento", "prompting"]
 category: modelos
 ---

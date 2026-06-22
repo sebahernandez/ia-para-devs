@@ -2,7 +2,6 @@
 title: "GitHub Copilot Workspace: el salto de completado de código a agente de tareas"
 description: "GitHub presentó Copilot Workspace como el siguiente paso después del autocompletado: un entorno donde describes una tarea en lenguaje natural y el modelo propone, explica y ejecuta los cambios en tu repositorio."
 pubDate: 2025-01-20
-author: "Equipo Blog IA"
 tags: ["github", "copilot", "agentes", "developer-tools"]
 category: herramientas
 ---

@@ -2,7 +2,6 @@
 title: "El estado real de los agentes de IA en 2026: qué funciona y qué no"
 description: "Los agentes de IA llevan dos años prometiendo automatizar el trabajo. Revisión honesta de dónde estamos: qué casos de uso funcionan en producción y cuáles siguen siendo demos."
 pubDate: 2026-02-20
-author: "Equipo Blog IA"
 tags: ["agentes", "producción", "2026", "revisión"]
 category: investigacion
 ---

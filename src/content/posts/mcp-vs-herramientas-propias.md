@@ -2,7 +2,6 @@
 title: "MCP vs herramientas propias: cuándo estandardizar y cuándo no"
 description: "MCP tiene mucho hype pero no es la solución para todo. Analizamos cuándo tiene sentido adoptar el protocolo y cuándo tu implementación propia de herramientas es más pragmática."
 pubDate: 2026-02-08
-author: "Equipo Blog IA"
 tags: ["mcp", "herramientas", "arquitectura", "opinión"]
 category: opinión
 ---

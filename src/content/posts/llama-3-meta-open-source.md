@@ -2,7 +2,6 @@
 title: "Llama 3: Meta apuesta fuerte por el open source y pone presión a los modelos propietarios"
 description: "Meta publicó Llama 3 con pesos descargables, contexto de 128K tokens y rendimiento competitivo con GPT-4. El ecosistema open source no había visto algo así desde el primer Llama."
 pubDate: 2025-02-20
-author: "Equipo Blog IA"
 tags: ["meta", "llama", "open-source", "self-hosted"]
 category: modelos
 ---

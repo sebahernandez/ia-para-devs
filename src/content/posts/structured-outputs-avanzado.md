@@ -2,7 +2,6 @@
 title: "Structured outputs avanzado: más allá del JSON básico"
 description: "JSON mode y structured outputs son solo el principio. Patrones avanzados para extraer datos complejos, manejar casos edge, y construir pipelines de extracción robustos en producción."
 pubDate: 2026-05-11
-author: "Equipo Blog IA"
 tags: ["structured-outputs", "json", "tutorial", "producción"]
 category: tutorial
 ---

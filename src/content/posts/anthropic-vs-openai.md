@@ -2,7 +2,6 @@
 title: "Anthropic vs OpenAI: no son lo mismo aunque compitan en el mismo mercado"
 description: "Las diferencias entre Anthropic y OpenAI van más allá del modelo. Filosofía de seguridad, acceso a herramientas, políticas de uso y visión a largo plazo marcan dos apuestas distintas sobre cómo construir IA."
 pubDate: 2025-11-10
-author: "Equipo Blog IA"
 tags: ["anthropic", "openai", "comparativa", "ecosistema"]
 category: opinión
 ---

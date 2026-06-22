@@ -2,7 +2,6 @@
 title: "Claude 3.7 Sonnet: análisis del modo Extended Thinking en producción"
 description: "Anthropic lanzó Claude 3.7 Sonnet con Extended Thinking activable. Analizamos qué cambia en la práctica, cuándo activarlo, y los trade-offs de latencia y coste."
 pubDate: 2026-03-04
-author: "Equipo Blog IA"
 tags: ["claude", "anthropic", "extended-thinking", "razonamiento"]
 category: modelos
 ---

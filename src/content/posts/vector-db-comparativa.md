@@ -2,7 +2,6 @@
 title: "Bases de datos vectoriales: Pinecone, Weaviate, Qdrant o pgvector. Cuál elegir."
 description: "Cada base de datos vectorial tiene un caso de uso donde brilla. Comparamos las opciones principales en rendimiento, facilidad de uso, coste y cuándo tiene sentido each una para un proyecto real."
 pubDate: 2025-10-01
-author: "Equipo Blog IA"
 tags: ["vectordb", "rag", "pinecone", "pgvector"]
 category: tutorial
 ---

@@ -2,7 +2,6 @@
 title: "Agentic coding: lo que aprendí después de seis meses dejando que la IA escriba más código"
 description: "Reflexión honesta sobre adoptar flujos de trabajo agénticos en desarrollo de software: qué ganamos, qué perdemos, y cuándo es contraproducente dejar que el agente haga demasiado."
 pubDate: 2026-03-12
-author: "Equipo Blog IA"
 tags: ["agentic-coding", "productividad", "reflexión", "opinión"]
 category: opinión
 ---

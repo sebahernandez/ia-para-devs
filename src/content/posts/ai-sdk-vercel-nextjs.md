@@ -2,7 +2,6 @@
 title: "Construir un chatbot con Vercel AI SDK y Next.js App Router en 30 minutos"
 description: "Tutorial completo: interfaz de chat con streaming, historial de mensajes, cambio de modelo y manejo de errores. Usando el Vercel AI SDK con Next.js 14 App Router y TypeScript."
 pubDate: 2025-10-18
-author: "Equipo Blog IA"
 tags: ["vercel", "next.js", "chatbot", "tutorial"]
 category: tutorial
 ---

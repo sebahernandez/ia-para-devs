@@ -2,7 +2,6 @@
 title: "Razonamiento en LLMs: qué funciona más allá del chain-of-thought básico"
 description: "Chain-of-thought fue el primer paso. Ahora hay una familia de técnicas más sofisticadas para extraer razonamiento real de los modelos. Cuáles usar y cuándo."
 pubDate: 2025-12-13
-author: "Equipo Blog IA"
 tags: ["razonamiento", "chain-of-thought", "prompting", "investigacion"]
 category: investigacion
 ---

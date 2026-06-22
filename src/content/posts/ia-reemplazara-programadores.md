@@ -2,7 +2,6 @@
 title: "La IA no va a reemplazar a los programadores. Va a cambiar qué significa serlo."
 description: "La pregunta no es si la IA reemplaza a los desarrolladores, sino qué partes del trabajo se automatizan y qué nuevas habilidades se vuelven más valiosas. Una lectura sin dramatismo."
 pubDate: 2025-07-01
-author: "Equipo Blog IA"
 tags: ["opinión", "futuro", "desarrolladores", "productividad"]
 category: opinión
 ---

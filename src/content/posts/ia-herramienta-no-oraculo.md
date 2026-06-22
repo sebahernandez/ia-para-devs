@@ -2,7 +2,6 @@
 title: "La IA es una herramienta, no un oráculo: por qué la confianza ciega es el peor antipatrón"
 description: "Los LLMs alucinan, tienen fechas de corte, no conocen tu contexto específico y a veces confunden certeza con precisión. Cómo usar IA con criterio sin dejar de aprovechar su potencial."
 pubDate: 2025-10-08
-author: "Equipo Blog IA"
 tags: ["opinión", "alucinaciones", "criterio", "mejores-prácticas"]
 category: opinión
 ---

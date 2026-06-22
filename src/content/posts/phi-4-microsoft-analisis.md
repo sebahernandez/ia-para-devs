@@ -2,7 +2,6 @@
 title: "Phi-4 de Microsoft: cuando los modelos pequeños se vuelven sorprendentemente capaces"
 description: "La familia Phi de Microsoft demostró que el tamaño no lo es todo. Phi-4 lleva esa filosofía más lejos con un modelo de 14B que compite en razonamiento con modelos mucho más grandes."
 pubDate: 2026-02-28
-author: "Equipo Blog IA"
 tags: ["phi-4", "microsoft", "modelos-pequeños", "razonamiento"]
 category: modelos
 ---

@@ -2,7 +2,6 @@
 title: "Llama 4 de Meta: la apuesta open source más ambiciosa hasta ahora"
 description: "Meta lanzó Llama 4 con arquitectura MoE, ventana de contexto masiva, y capacidades multimodales. Analizamos qué significa para el ecosistema open source."
 pubDate: 2026-03-24
-author: "Equipo Blog IA"
 tags: ["llama", "meta", "open-source", "multimodal"]
 category: modelos
 ---

@@ -2,7 +2,6 @@
 title: "Tutorial: construye tu propio servidor MCP en menos de 100 líneas"
 description: "El Model Context Protocol de Anthropic permite a los LLMs conectarse con herramientas externas. Construimos un servidor MCP funcional paso a paso con TypeScript."
 pubDate: 2026-01-03
-author: "Equipo Blog IA"
 tags: ["mcp", "tutorial", "typescript", "herramientas"]
 category: tutorial
 ---

@@ -2,7 +2,6 @@
 title: "Embeddings en 2025: qué modelo de vectores elegir para tu aplicación"
 description: "text-embedding-3-large de OpenAI, Cohere Embed v3, y los modelos de HuggingFace como BGE o E5 tienen rendimiento y costes muy distintos. Guía práctica para elegir según el caso de uso."
 pubDate: 2025-03-20
-author: "Equipo Blog IA"
 tags: ["embeddings", "vector-search", "openai", "rag"]
 category: investigacion
 ---

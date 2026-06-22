@@ -2,7 +2,6 @@
 title: "GitHub Copilot vs Cursor en 2025: cuál usar según tu caso"
 description: "Dos años después de que Cursor irrumpiera en el mercado, la comparación con GitHub Copilot ya no es tan obvia. Analizamos los casos donde cada uno gana."
 pubDate: 2025-12-17
-author: "Equipo Blog IA"
 tags: ["cursor", "copilot", "herramientas", "productividad"]
 category: herramientas
 ---

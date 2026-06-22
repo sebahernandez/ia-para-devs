@@ -2,7 +2,6 @@
 title: "Ollama: ejecutar LLMs en local con un solo comando"
 description: "Ollama simplifica radicalmente correr modelos de lenguaje en tu propia máquina. Un repaso de cómo funciona, qué modelos soporta y cuándo tiene sentido frente a usar una API en la nube."
 pubDate: 2025-02-25
-author: "Equipo Blog IA"
 tags: ["ollama", "local-llm", "self-hosted", "privacidad"]
 category: herramientas
 ---

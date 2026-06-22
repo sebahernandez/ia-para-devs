@@ -2,7 +2,6 @@
 title: "RAG en 2025: más allá del vector search básico"
 description: "La recuperación aumentada evolucionó. RAG híbrido, reranking, chunking inteligente y grafos de conocimiento son técnicas que marcan la diferencia entre un RAG que funciona y uno que falla en producción."
 pubDate: 2025-01-12
-author: "Equipo Blog IA"
 tags: ["rag", "vector-search", "arquitectura", "embeddings"]
 category: investigacion
 ---

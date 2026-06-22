@@ -2,7 +2,6 @@
 title: "El ecosistema MCP en 2026: qué servidores usar y cuáles evitar"
 description: "MCP creció rápidamente y ahora hay cientos de servidores disponibles. Revisamos cuáles han madurado lo suficiente para producción y cuáles son mejores evitar."
 pubDate: 2026-04-05
-author: "Equipo Blog IA"
 tags: ["mcp", "herramientas", "ecosistema", "producción"]
 category: herramientas
 ---

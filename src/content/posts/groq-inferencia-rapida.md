@@ -2,7 +2,6 @@
 title: "Groq: inferencia a 500 tokens por segundo y lo que cambia cuando el modelo va rápido"
 description: "Groq usa chips LPU propios en lugar de GPUs para inferencia de LLMs. El resultado: velocidades que hacen que la generación de texto parezca instantánea. Revisamos cuándo esto importa y cuándo no."
 pubDate: 2025-04-08
-author: "Equipo Blog IA"
 tags: ["groq", "inferencia", "velocidad", "api"]
 category: herramientas
 ---

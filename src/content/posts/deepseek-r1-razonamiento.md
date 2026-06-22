@@ -2,7 +2,6 @@
 title: "DeepSeek R1: el modelo chino que igualó a o1 a una fracción del coste"
 description: "DeepSeek publicó R1 con pesos abiertos y rendimiento equivalente a OpenAI o1 en matemáticas y código. El impacto en el mercado fue inmediato y la discusión sobre eficiencia en el entrenamiento se reabrió."
 pubDate: 2025-03-18
-author: "Equipo Blog IA"
 tags: ["deepseek", "razonamiento", "open-source", "china"]
 category: modelos
 ---

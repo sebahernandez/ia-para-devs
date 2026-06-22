@@ -2,7 +2,6 @@
 title: "Claude 4: lo que sabemos, lo que se especula, y lo que importa"
 description: "Anthropic se acerca a la siguiente generación de Claude. Qué indica la dirección de investigación publicada, qué rumores tienen base técnica, y qué esperar del próximo gran lanzamiento."
 pubDate: 2026-06-18
-author: "Equipo Blog IA"
 tags: ["claude", "anthropic", "futuro", "opinión"]
 category: opinión
 ---

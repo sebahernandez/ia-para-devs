@@ -11,7 +11,7 @@ const posts = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      author: z.string().default('Equipo Blog IA'),
+      author: z.string().default('Sebacure'),
       tags: z.array(z.string()).default([]),
       category: z.enum([
         'modelos',

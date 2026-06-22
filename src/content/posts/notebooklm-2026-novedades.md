@@ -2,7 +2,6 @@
 title: "NotebookLM en 2026: de experimento a herramienta de investigación seria"
 description: "Google NotebookLM empezó como un experimento curioso. En 2026, con generación de audio, fuentes ampliadas, y mejor integración con Workspace, se convirtió en una herramienta real para investigadores."
 pubDate: 2026-05-19
-author: "Equipo Blog IA"
 tags: ["notebooklm", "google", "investigación", "herramientas"]
 category: herramientas
 ---

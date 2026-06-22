@@ -2,7 +2,6 @@
 title: "GPT-4o con generación de imágenes: lo que cambió y lo que todavía falta"
 description: "OpenAI integró generación de imágenes directamente en GPT-4o, creando un modelo verdaderamente multimodal. Qué gana esto respecto a DALL-E separado y cuáles son las limitaciones."
 pubDate: 2026-05-23
-author: "Equipo Blog IA"
 tags: ["gpt-4o", "imágenes", "multimodal", "openai"]
 category: herramientas
 ---

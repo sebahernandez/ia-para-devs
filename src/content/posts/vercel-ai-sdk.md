@@ -2,7 +2,6 @@
 title: "Vercel AI SDK: la capa de abstracción que hace sensato trabajar con múltiples LLMs"
 description: "El AI SDK de Vercel unifica la interfaz para OpenAI, Anthropic, Google y otros proveedores. Streaming, generación de objetos estructurados y herramientas con una API consistente."
 pubDate: 2025-03-10
-author: "Equipo Blog IA"
 tags: ["vercel", "ai-sdk", "typescript", "next.js"]
 category: herramientas
 ---

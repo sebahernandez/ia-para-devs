@@ -2,7 +2,6 @@
 title: "IA multimodal y video: dónde está el estado del arte en 2026"
 description: "El procesamiento de video por LLMs pasó de experimental a útil en casos específicos. Revisamos qué modelos pueden hacer con video, las limitaciones reales, y los casos de uso viables."
 pubDate: 2026-04-09
-author: "Equipo Blog IA"
 tags: ["multimodal", "video", "gemini", "investigacion"]
 category: investigacion
 ---

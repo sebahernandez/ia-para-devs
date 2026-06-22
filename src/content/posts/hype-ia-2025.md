@@ -2,7 +2,6 @@
 title: "El ciclo del hype de la IA en 2025: qué cumplió y qué sigue siendo promesa"
 description: "Cada semana hay un nuevo modelo o herramienta que 'lo cambia todo'. Un año después, ¿qué realmente cambió en cómo los desarrolladores construyen software? Balance sin filtros."
 pubDate: 2025-07-15
-author: "Equipo Blog IA"
 tags: ["opinión", "hype", "balance", "2025"]
 category: opinión
 ---

@@ -2,7 +2,6 @@
 title: "Gemini 1.5 Pro y la ventana de contexto de 1 millón de tokens"
 description: "Google amplió el contexto de Gemini 1.5 Pro a 1 millón de tokens y, en versión experimental, a 2 millones. Qué cambia cuando puedes meter un codebase entero en el prompt."
 pubDate: 2025-02-10
-author: "Equipo Blog IA"
 tags: ["google", "gemini", "context-window", "multimodal"]
 category: modelos
 ---

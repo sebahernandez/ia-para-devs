@@ -2,7 +2,6 @@
 title: "Claude 3.5 Sonnet: el modelo que cambió la vara de los benchmarks"
 description: "Anthropic lanzó Claude 3.5 Sonnet y superó a GPT-4o en la mayoría de pruebas de razonamiento y código. Qué cambia para los desarrolladores y qué limitaciones sigue teniendo."
 pubDate: 2025-01-15
-author: "Equipo Blog IA"
 tags: ["claude", "anthropic", "benchmarks", "llm"]
 category: modelos
 featured: true

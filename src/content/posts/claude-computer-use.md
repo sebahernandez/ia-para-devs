@@ -2,7 +2,6 @@
 title: "Claude Computer Use: el modelo que opera interfaces gráficas, con todas sus limitaciones"
 description: "Anthropic lanzó en beta la capacidad de Claude para controlar un ordenador mediante capturas de pantalla. Revisamos cómo funciona, para qué sirve hoy y por qué todavía no reemplaza la automatización tradicional."
 pubDate: 2025-04-22
-author: "Equipo Blog IA"
 tags: ["anthropic", "claude", "computer-use", "automatización"]
 category: herramientas
 ---

@@ -2,7 +2,6 @@
 title: "Fine-tuning de GPT-4o Mini: cuándo hacerlo y cómo preparar los datos"
 description: "OpenAI permite hacer fine-tuning de GPT-4o Mini con tus propios datos. Guía completa: preparación del dataset, formato JSONL, llamada a la API y evaluación del resultado."
 pubDate: 2025-09-15
-author: "Equipo Blog IA"
 tags: ["fine-tuning", "openai", "gpt-4o-mini", "tutorial"]
 category: tutorial
 ---

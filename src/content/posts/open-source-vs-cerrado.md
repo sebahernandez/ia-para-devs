@@ -2,7 +2,6 @@
 title: "Open source vs modelos propietarios: la elección real en 2025"
 description: "Llama 3, Mistral y DeepSeek cerraron la brecha de calidad con GPT-4 y Claude. Pero la elección no es solo de rendimiento: hay licencias, infraestructura, latencia y privacidad en juego."
 pubDate: 2025-08-01
-author: "Equipo Blog IA"
 tags: ["open-source", "propietario", "arquitectura", "decisiones"]
 category: opinión
 ---

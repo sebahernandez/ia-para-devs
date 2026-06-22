@@ -2,7 +2,6 @@
 title: "pgvector en producción: búsqueda vectorial sin salir de PostgreSQL"
 description: "Si ya usas PostgreSQL, pgvector te da búsqueda vectorial sin añadir otra base de datos. Tutorial de setup, indexación, y cuándo tiene sentido versus una base de datos vectorial dedicada."
 pubDate: 2026-03-20
-author: "Equipo Blog IA"
 tags: ["pgvector", "postgresql", "rag", "tutorial"]
 category: tutorial
 ---

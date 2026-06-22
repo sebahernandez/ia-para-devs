@@ -2,7 +2,6 @@
 title: "Vibe coding: cuando dejar de entender el código que escribes empieza a ser un problema"
 description: "El término 'vibe coding' describe desarrollar aceptando código de IA sin entenderlo completamente. Hay casos donde es una herramienta válida. Hay muchos más donde es una trampa."
 pubDate: 2025-09-05
-author: "Equipo Blog IA"
 tags: ["opinión", "vibe-coding", "calidad", "deuda-técnica"]
 category: opinión
 ---

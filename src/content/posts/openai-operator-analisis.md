@@ -2,7 +2,6 @@
 title: "OpenAI Operator: el agente que navega la web por ti"
 description: "Operator es la apuesta de OpenAI por agentes que interactúan con sitios web reales. Evaluamos qué puede hacer, dónde falla, y si realmente cambia la forma en que usamos internet."
 pubDate: 2026-01-27
-author: "Equipo Blog IA"
 tags: ["operator", "openai", "agentes", "web"]
 category: herramientas
 ---
