@@ -249,6 +249,14 @@ html.light {
     @apply rounded-xl border border-ink-800;
   }
 
+  .post-content .video-embed {
+    @apply relative w-full overflow-hidden rounded-xl border border-ink-800;
+    aspect-ratio: 16 / 9;
+  }
+  .post-content .video-embed iframe {
+    @apply absolute inset-0 h-full w-full;
+  }
+
   /* Post content — overrides modo claro */
   html.light .post-content h1,
   html.light .post-content h2,
