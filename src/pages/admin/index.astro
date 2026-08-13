@@ -54,7 +54,14 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
               ) : (
                 <span class="chip">Publicado</span>
               )}
-              {p.featured && <span class="chip ml-1">Destacado</span>}
+              <button
+                type="button"
+                class="chip ml-1 feature-btn"
+                data-id={p.id}
+                data-featured={p.featured ? 'true' : 'false'}
+              >
+                {p.featured ? '★ Destacado' : '☆ Destacar'}
+              </button>
             </td>
             <td class="py-3 text-right">
               <a href={`/admin/posts/${p.id}/edit/`} class="link mr-3">
@@ -102,6 +109,25 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
           btn.closest('tr')?.remove();
         } else {
           alert('No se pudo eliminar el post.');
+        }
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('.feature-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const next = btn.dataset.featured !== 'true';
+        btn.disabled = true;
+        const res = await fetch(`/api/admin/posts/${id}/featured`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ featured: next }),
+        });
+        if (res.ok) {
+          window.location.reload();
+        } else {
+          alert('No se pudo actualizar el destacado.');
+          btn.disabled = false;
         }
       });
     });

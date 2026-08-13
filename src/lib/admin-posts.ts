@@ -1,4 +1,4 @@
-import { desc, eq } from 'drizzle-orm';
+import { and, desc, eq, ne } from 'drizzle-orm';
 import { db } from './db';
 import { withWriteDb } from './db-write';
 import { renderMarkdown } from './markdown';
@@ -31,7 +31,10 @@ export type AdminPostRow = {
 export type PostForEdit = PostInput & { id: number };
 
 export async function listAllPostsForAdmin(): Promise<AdminPostRow[]> {
-  const rows = await db.query.posts.findMany({ orderBy: [desc(posts.createdAt)] });
+  // Los posts migrados desde Markdown comparten el mismo createdAt (una sola
+  // transacción), así que se agrega id como desempate para un orden estable
+  // entre requests (importante para que la paginación no salte filas).
+  const rows = await db.query.posts.findMany({ orderBy: [desc(posts.createdAt), desc(posts.id)] });
   return rows.map((r) => ({
     id: r.id,
     slug: r.slug,
@@ -90,6 +93,11 @@ export async function createPost(input: PostInput): Promise<number> {
         await tx.insert(postTags).values({ postId, tagId });
       }
 
+      // Solo puede haber un post destacado a la vez.
+      if (input.featured) {
+        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, postId)));
+      }
+
       return postId;
     })
   );
@@ -115,12 +123,30 @@ export async function updatePost(id: number, input: PostInput): Promise<void> {
           .returning({ id: tags.id });
         await tx.insert(postTags).values({ postId: id, tagId });
       }
+
+      // Solo puede haber un post destacado a la vez.
+      if (input.featured) {
+        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, id)));
+      }
     })
   );
 }
 
 export async function deletePost(id: number): Promise<void> {
   await withWriteDb(async (writeDb) => writeDb.delete(posts).where(eq(posts.id, id)));
+}
+
+// Marca (o desmarca) un post como destacado. Al marcar uno, desmarca
+// cualquier otro que lo estuviera — solo puede haber uno a la vez.
+export async function setPostFeatured(id: number, featured: boolean): Promise<void> {
+  await withWriteDb(async (writeDb) =>
+    writeDb.transaction(async (tx) => {
+      if (featured) {
+        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, id)));
+      }
+      await tx.update(posts).set({ featured }).where(eq(posts.id, id));
+    })
+  );
 }
 
 export async function triggerRebuild(): Promise<void> {

@@ -110,7 +110,7 @@ const toDateInputValue = (d: Date) => d.toISOString().slice(0, 10);
     </label>
     <label class="flex items-center gap-2 text-sm text-ink-200">
       <input id="featured" name="featured" type="checkbox" checked={post?.featured ?? false} />
-      Destacado
+      Destacado <span class="text-ink-500">(solo puede haber uno)</span>
     </label>
   </div>
 
