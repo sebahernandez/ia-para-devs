@@ -31,10 +31,9 @@ export type AdminPostRow = {
 export type PostForEdit = PostInput & { id: number };
 
 export async function listAllPostsForAdmin(): Promise<AdminPostRow[]> {
-  // Los posts migrados desde Markdown comparten el mismo createdAt (una sola
-  // transacción), así que se agrega id como desempate para un orden estable
-  // entre requests (importante para que la paginación no salte filas).
-  const rows = await db.query.posts.findMany({ orderBy: [desc(posts.createdAt), desc(posts.id)] });
+  // Orden por fecha de publicación (más reciente primero), con id como
+  // desempate estable entre requests para posts con el mismo pubDate.
+  const rows = await db.query.posts.findMany({ orderBy: [desc(posts.pubDate), desc(posts.id)] });
   return rows.map((r) => ({
     id: r.id,
     slug: r.slug,
