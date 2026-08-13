@@ -1,0 +1,15 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import PostForm from '../../../components/admin/PostForm.astro';
+import { getAllCategoryDefs } from '../../../lib/posts';
+
+const categories = await getAllCategoryDefs();
+---
+
+<AdminLayout title="Nuevo post">
+  <h1 class="text-2xl font-semibold text-white">Nuevo post</h1>
+  <div class="mt-8">
+    <PostForm categories={categories} />
+  </div>
+</AdminLayout>

@@ -1,44 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCategoriesWithCounts } from '../../lib/posts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCatClass } from '../../utils/categories';
 
-const allPosts = await getCollection('posts', ({ data }) => !data.draft);
-
-const byCategory = new Map<string, number>();
-for (const p of allPosts) {
-  byCategory.set(p.data.category, (byCategory.get(p.data.category) ?? 0) + 1);
-}
-
-const labels: Record<string, string> = {
-  modelos: 'Modelos',
-  herramientas: 'Herramientas',
-  investigacion: 'Investigación',
-  opinión: 'Opinión',
-  tutorial: 'Tutoriales',
-};
-
-const descriptions: Record<string, string> = {
-  modelos:
-    'Lanzamientos, comparativas y benchmarks de modelos de lenguaje, visión, audio y código.',
-  herramientas:
-    'SDKs, IDEs, agentes y utilidades prácticas para integrar IA en tu flujo de trabajo.',
-  investigacion:
-    'Papers, técnicas nuevas y movimientos importantes que definen el estado del arte.',
-  opinión:
-    'Análisis editorial sobre hacia dónde va la industria y qué significa para los devs.',
-  tutorial:
-    'Guías paso a paso con código, prompts y arquitecturas listas para producción.',
-};
-
-const categories = [...byCategory.entries()]
-  .sort((a, b) => b[1] - a[1])
-  .map(([cat, count]) => ({
-    slug: cat,
-    label: labels[cat] ?? cat,
-    desc: descriptions[cat] ?? '',
-    count,
-  }));
+const categories = (await getCategoriesWithCounts()).map((c) => ({
+  slug: c.slug,
+  label: c.label,
+  desc: c.description,
+  count: c.count,
+}));
 ---
 
 <BaseLayout

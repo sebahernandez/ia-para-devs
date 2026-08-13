@@ -1,13 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAllPosts, type PostSummary } from '../../lib/posts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
-  const tagMap = new Map<string, typeof posts>();
+  const posts = await getAllPosts();
+  const tagMap = new Map<string, PostSummary[]>();
   for (const p of posts) {
-    for (const t of p.data.tags) {
+    for (const t of p.tags) {
       if (!tagMap.has(t)) tagMap.set(t, []);
       tagMap.get(t)!.push(p);
     }
@@ -16,9 +16,8 @@ export async function getStaticPaths() {
     params: { slug: tag },
     props: {
       tag,
-      posts: list.sort(
-        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-      ),
+      // getAllPosts() ya viene ordenado por pubDate desc
+      posts: list,
     },
   }));
 }

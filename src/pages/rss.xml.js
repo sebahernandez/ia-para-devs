@@ -1,9 +1,8 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getAllPosts } from '../lib/posts';
 
 export async function GET(context) {
-  const posts = (await getCollection('posts', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const posts = await getAllPosts();
 
   return rss({
     title: 'Blog IA para devs',
@@ -11,12 +10,12 @@ export async function GET(context) {
       'Noticias, análisis y tutoriales sobre modelos de inteligencia artificial para desarrolladores.',
     site: context.site,
     items: posts.map((post) => ({
-      title: post.data.title,
-      description: post.data.description,
-      pubDate: post.data.pubDate,
-      categories: [post.data.category, ...post.data.tags],
-      author: post.data.author,
-      link: `/blog/${post.id}/`,
+      title: post.title,
+      description: post.description,
+      pubDate: post.pubDate,
+      categories: [post.category.slug, ...post.tags],
+      author: post.author,
+      link: `/blog/${post.slug}/`,
     })),
     customData: `<language>es</language>`,
   });

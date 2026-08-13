@@ -1,15 +1,15 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { Post } from '../lib/posts';
 import BaseLayout from './BaseLayout.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import { getCatClass } from '../utils/categories';
 
 interface Props {
-  post: CollectionEntry<'posts'>;
+  post: Post;
 }
 
 const { post } = Astro.props;
-const { data } = post;
+const data = post;
 
 const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   year: 'numeric',
@@ -36,10 +36,10 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
     <header class="mb-12">
       <div class="flex flex-wrap items-center gap-3 text-xs text-ink-400">
         <a
-          href={`/categorias/${data.category}/`}
-          class={`font-mono uppercase tracking-widest transition-[filter] hover:brightness-125 ${getCatClass(data.category)}`}
+          href={`/categorias/${data.category.slug}/`}
+          class={`font-mono uppercase tracking-widest transition-[filter] hover:brightness-125 ${getCatClass(data.category.slug)}`}
         >
-          {data.category}
+          {data.category.slug}
         </a>
         <span class="h-1 w-1 rounded-full bg-ink-600"></span>
         <time datetime={data.pubDate.toISOString()}>
@@ -62,7 +62,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
 
       <h1
         class="mt-5 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
-        transition:name={`post-title-${post.id}`}
+        transition:name={`post-title-${post.slug}`}
       >
         {data.title}
       </h1>

@@ -1,20 +1,20 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getAllPostsWithContent } from '../../lib/posts';
 import PostLayout from '../../layouts/PostLayout.astro';
 
-// SSG: astro genera una página estática por cada .md en build-time
+// SSG: astro genera una página estática por cada post en build-time,
+// consultando Neon una sola vez (no una query por slug).
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const posts = await getAllPostsWithContent();
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.slug },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
 ---
 
 <PostLayout post={post}>
-  <Content />
+  <Fragment set:html={post.contentHtml} />
 </PostLayout>

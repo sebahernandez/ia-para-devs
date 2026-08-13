@@ -1,34 +1,27 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAllCategoryDefs, getAllPosts } from '../../lib/posts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { getCatClass } from '../../utils/categories';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
-  const categories = [...new Set(posts.map((p) => p.data.category))];
+  const posts = await getAllPosts();
+  const categorySlugs = [...new Set(posts.map((p) => p.category.slug))];
 
-  return categories.map((cat) => ({
+  return categorySlugs.map((cat) => ({
     params: { slug: cat },
     props: {
       category: cat,
-      posts: posts
-        .filter((p) => p.data.category === cat)
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      // getAllPosts() ya viene ordenado por pubDate desc
+      posts: posts.filter((p) => p.category.slug === cat),
     },
   }));
 }
 
 const { category, posts } = Astro.props;
 
-const labels: Record<string, string> = {
-  modelos: 'Modelos',
-  herramientas: 'Herramientas',
-  investigacion: 'Investigación',
-  opinión: 'Opinión',
-  tutorial: 'Tutoriales',
-};
-const label = labels[category] ?? category;
+const categoryDefs = await getAllCategoryDefs();
+const label = categoryDefs.find((c) => c.slug === category)?.label ?? category;
 ---
 
 <BaseLayout

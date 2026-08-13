@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  showNav?: boolean;
+}
+
+const { title, showNav = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} · Admin</title>
+  </head>
+  <body class="min-h-screen bg-ink-950 text-ink-100">
+    {
+      showNav && (
+        <header class="border-b border-ink-800">
+          <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+            <a href="/admin/" class="font-mono text-sm uppercase tracking-widest text-ink-100">
+              Admin · Blog IA
+            </a>
+            <nav class="flex items-center gap-4 text-sm">
+              <a href="/admin/" class="link">Posts</a>
+              <a href="/admin/posts/new/" class="link">Nuevo</a>
+              <a href="/" class="link">Ver sitio ↗</a>
+              <form method="POST" action="/api/admin/logout">
+                <button type="submit" class="link">Cerrar sesión</button>
+              </form>
+            </nav>
+          </div>
+        </header>
+      )
+    }
+    <main class="mx-auto max-w-4xl px-6 py-10">
+      <slot />
+    </main>
+  </body>
+</html>

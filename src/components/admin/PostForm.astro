@@ -1,0 +1,211 @@
+---
+import type { Category } from '../../lib/posts';
+import type { PostForEdit } from '../../lib/admin-posts';
+
+interface Props {
+  categories: Category[];
+  post?: PostForEdit;
+}
+
+const { categories, post } = Astro.props;
+const isEdit = Boolean(post);
+
+const toDateInputValue = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<form id="post-form" class="flex flex-col gap-5" data-post-id={post?.id ?? ''}>
+  <div>
+    <label class="block text-xs uppercase tracking-widest text-ink-400" for="title">Título</label>
+    <input
+      id="title"
+      name="title"
+      type="text"
+      required
+      value={post?.title ?? ''}
+      class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+    />
+  </div>
+
+  <div>
+    <label class="block text-xs uppercase tracking-widest text-ink-400" for="slug">Slug</label>
+    <input
+      id="slug"
+      name="slug"
+      type="text"
+      required
+      pattern="[a-z0-9]+(-[a-z0-9]+)*"
+      value={post?.slug ?? ''}
+      data-touched={isEdit ? 'true' : 'false'}
+      class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+    />
+  </div>
+
+  <div>
+    <label class="block text-xs uppercase tracking-widest text-ink-400" for="description">Descripción</label>
+    <textarea
+      id="description"
+      name="description"
+      required
+      rows={2}
+      class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+    >{post?.description ?? ''}</textarea>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label class="block text-xs uppercase tracking-widest text-ink-400" for="category">Categoría</label>
+      <select
+        id="category"
+        name="category"
+        required
+        class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+      >
+        {categories.map((c) => (
+          <option value={c.slug} selected={post?.categorySlug === c.slug}>
+            {c.label}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label class="block text-xs uppercase tracking-widest text-ink-400" for="pubDate">Fecha de publicación</label>
+      <input
+        id="pubDate"
+        name="pubDate"
+        type="date"
+        required
+        value={post ? toDateInputValue(post.pubDate) : toDateInputValue(new Date())}
+        class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+      />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label class="block text-xs uppercase tracking-widest text-ink-400" for="tags">Tags (separados por coma)</label>
+      <input
+        id="tags"
+        name="tags"
+        type="text"
+        value={post?.tags.join(', ') ?? ''}
+        class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+      />
+    </div>
+    <div>
+      <label class="block text-xs uppercase tracking-widest text-ink-400" for="author">Autor</label>
+      <input
+        id="author"
+        name="author"
+        type="text"
+        value={post?.author ?? 'Sebacure'}
+        class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+      />
+    </div>
+  </div>
+
+  <div class="flex gap-6">
+    <label class="flex items-center gap-2 text-sm text-ink-200">
+      <input id="draft" name="draft" type="checkbox" checked={post?.draft ?? true} />
+      Borrador
+    </label>
+    <label class="flex items-center gap-2 text-sm text-ink-200">
+      <input id="featured" name="featured" type="checkbox" checked={post?.featured ?? false} />
+      Destacado
+    </label>
+  </div>
+
+  <div>
+    <label class="block text-xs uppercase tracking-widest text-ink-400" for="content">Contenido (Markdown)</label>
+    <textarea
+      id="content"
+      name="content"
+      required
+      rows={20}
+      class="mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-900/60 px-4 py-2.5 font-mono text-sm text-ink-100 focus:border-ink-500 focus:outline-none"
+    >{post?.contentMd ?? ''}</textarea>
+  </div>
+
+  <p id="form-error" class="hidden text-sm text-red-400"></p>
+
+  <div class="flex items-center gap-3">
+    <button
+      type="submit"
+      class="rounded-md bg-white px-4 py-2.5 text-sm font-medium text-ink-950"
+    >
+      {isEdit ? 'Guardar cambios' : 'Crear post'}
+    </button>
+    <a href="/admin/" class="link text-sm">Cancelar</a>
+  </div>
+</form>
+
+<script>
+  function slugify(text: string): string {
+    return text
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function setup() {
+    const form = document.getElementById('post-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    const titleInput = form.querySelector<HTMLInputElement>('#title')!;
+    const slugInput = form.querySelector<HTMLInputElement>('#slug')!;
+    const errorEl = document.getElementById('form-error')!;
+    const postId = form.dataset.postId;
+
+    slugInput.addEventListener('input', () => {
+      slugInput.dataset.touched = 'true';
+    });
+
+    titleInput.addEventListener('input', () => {
+      if (slugInput.dataset.touched === 'true') return;
+      slugInput.value = slugify(titleInput.value);
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+
+      const data = new FormData(form);
+      const payload = {
+        title: String(data.get('title') ?? ''),
+        slug: String(data.get('slug') ?? ''),
+        description: String(data.get('description') ?? ''),
+        category: String(data.get('category') ?? ''),
+        pubDate: String(data.get('pubDate') ?? ''),
+        tags: String(data.get('tags') ?? '')
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean),
+        author: String(data.get('author') ?? 'Sebacure'),
+        draft: data.get('draft') === 'on',
+        featured: data.get('featured') === 'on',
+        content: String(data.get('content') ?? ''),
+      };
+
+      const url = postId ? `/api/admin/posts/${postId}` : '/api/admin/posts';
+      const method = postId ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        window.location.href = '/admin/';
+      } else {
+        const body = await res.json().catch(() => ({ error: 'Error desconocido' }));
+        errorEl.textContent = body.error ?? 'No se pudo guardar el post.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>

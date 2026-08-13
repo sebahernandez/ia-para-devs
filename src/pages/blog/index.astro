@@ -1,23 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAllCategoryDefs, getAllPosts } from '../../lib/posts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { getCatClass } from '../../utils/categories';
 
-const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = await getAllPosts();
 
 const BATCH = 6;
 
-const categories = [...new Set(allPosts.map(p => p.data.category))].sort() as string[];
+const categorySlugs = [...new Set(allPosts.map((p) => p.category.slug))].sort();
 
-const labels: Record<string, string> = {
-  modelos: 'Modelos',
-  herramientas: 'Herramientas',
-  investigacion: 'Investigación',
-  opinión: 'Opinión',
-  tutorial: 'Tutoriales',
-};
+const categoryDefs = await getAllCategoryDefs();
+const labels: Record<string, string> = Object.fromEntries(categoryDefs.map((c) => [c.slug, c.label]));
 ---
 
 <BaseLayout
@@ -71,7 +65,7 @@ const labels: Record<string, string> = {
         >
           Todos
         </button>
-        {categories.map((cat) => (
+        {categorySlugs.map((cat) => (
           <button
             data-cat={cat}
             class={`cat-btn rounded-full border border-ink-700 bg-ink-900/40 px-3.5 py-1.5
@@ -99,9 +93,9 @@ const labels: Record<string, string> = {
       {allPosts.map((post, i) => (
         <div
           data-post-index={i}
-          data-category={post.data.category}
-          data-title={post.data.title.toLowerCase()}
-          data-desc={post.data.description.toLowerCase()}
+          data-category={post.category.slug}
+          data-title={post.title.toLowerCase()}
+          data-desc={post.description.toLowerCase()}
           class="post-item"
         >
           <PostCard post={post} />

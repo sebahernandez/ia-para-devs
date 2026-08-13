@@ -1,0 +1,23 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+import PostForm from '../../../../components/admin/PostForm.astro';
+import { getAllCategoryDefs } from '../../../../lib/posts';
+import { getPostForEdit } from '../../../../lib/admin-posts';
+
+const id = Number(Astro.params.id);
+const post = Number.isFinite(id) ? await getPostForEdit(id) : null;
+
+if (!post) {
+  return Astro.redirect('/admin/');
+}
+
+const categories = await getAllCategoryDefs();
+---
+
+<AdminLayout title={`Editar: ${post.title}`}>
+  <h1 class="text-2xl font-semibold text-white">Editar post</h1>
+  <div class="mt-8">
+    <PostForm categories={categories} post={post} />
+  </div>
+</AdminLayout>
