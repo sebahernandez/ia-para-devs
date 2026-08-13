@@ -3,7 +3,15 @@ export const prerender = false;
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import { listAllPostsForAdmin } from '../../lib/admin-posts';
 
-const posts = await listAllPostsForAdmin();
+const PAGE_SIZE = 20;
+
+const allPosts = await listAllPostsForAdmin();
+const totalPages = Math.max(1, Math.ceil(allPosts.length / PAGE_SIZE));
+
+const requestedPage = Number(Astro.url.searchParams.get('page') ?? '1');
+const page = Number.isFinite(requestedPage) ? Math.min(Math.max(1, requestedPage), totalPages) : 1;
+
+const posts = allPosts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
 const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   year: 'numeric',
@@ -14,7 +22,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
 
 <AdminLayout title="Posts">
   <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-semibold text-white">Posts ({posts.length})</h1>
+    <h1 class="text-2xl font-semibold text-white">Posts ({allPosts.length})</h1>
     <a
       href="/admin/posts/new/"
       class="rounded-md bg-white px-4 py-2 text-sm font-medium text-ink-950"
@@ -61,6 +69,28 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
       }
     </tbody>
   </table>
+
+  {
+    totalPages > 1 && (
+      <div class="mt-6 flex items-center justify-between text-sm">
+        <a
+          href={page > 1 ? `/admin/?page=${page - 1}` : undefined}
+          aria-disabled={page <= 1}
+          class={`link ${page <= 1 ? 'pointer-events-none opacity-30' : ''}`}
+        >
+          ← Anterior
+        </a>
+        <span class="text-ink-400">Página {page} de {totalPages}</span>
+        <a
+          href={page < totalPages ? `/admin/?page=${page + 1}` : undefined}
+          aria-disabled={page >= totalPages}
+          class={`link ${page >= totalPages ? 'pointer-events-none opacity-30' : ''}`}
+        >
+          Siguiente →
+        </a>
+      </div>
+    )
+  }
 
   <script>
     document.querySelectorAll<HTMLButtonElement>('.delete-btn').forEach((btn) => {
