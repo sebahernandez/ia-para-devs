@@ -12,26 +12,49 @@ const { title, showNav = true } = Astro.props;
 <!doctype html>
 <html lang="es">
   <head>
+    <!-- Aplica el tema antes de pintar (evita flash). Comparte localStorage con el sitio público. -->
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.classList.toggle('light', t === 'light');
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>{title} · Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="min-h-screen bg-ink-950 text-ink-100">
     {
       showNav && (
         <header class="border-b border-ink-800">
-          <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+          <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-4 px-6 py-4">
             <a href="/admin/" class="font-mono text-sm uppercase tracking-widest text-ink-100">
               Admin · Blog IA
             </a>
-            <nav class="flex items-center gap-4 text-sm">
+            <nav class="flex items-center gap-5 text-sm">
               <a href="/admin/" class="link">Posts</a>
               <a href="/admin/posts/new/" class="link">Nuevo</a>
               <a href="/" class="link">Ver sitio ↗</a>
-              <form method="POST" action="/api/admin/logout">
+              <form method="POST" action="/api/admin/logout" class="flex">
                 <button type="submit" class="link">Cerrar sesión</button>
               </form>
+              <button
+                id="admin-theme-toggle"
+                type="button"
+                aria-label="Cambiar tema"
+                class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink-700 text-ink-200 transition-colors hover:border-ink-500 hover:text-ink-100"
+              >
+                <svg id="admin-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg id="admin-icon-moon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              </button>
             </nav>
           </div>
         </header>
@@ -40,5 +63,25 @@ const { title, showNav = true } = Astro.props;
     <main class="mx-auto max-w-4xl px-6 py-10">
       <slot />
     </main>
+
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('admin-theme-toggle');
+        if (!btn) return;
+        var sun = document.getElementById('admin-icon-sun');
+        var moon = document.getElementById('admin-icon-moon');
+        function sync() {
+          var light = document.documentElement.classList.contains('light');
+          sun.classList.toggle('hidden', light);
+          moon.classList.toggle('hidden', !light);
+        }
+        sync();
+        btn.addEventListener('click', function () {
+          var light = document.documentElement.classList.toggle('light');
+          localStorage.setItem('theme', light ? 'light' : 'dark');
+          sync();
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -21,61 +21,61 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
 ---
 
 <AdminLayout title="Posts">
-  <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-semibold text-white">Posts ({allPosts.length})</h1>
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <h1 class="text-2xl font-semibold">Posts ({allPosts.length})</h1>
     <a
       href="/admin/posts/new/"
-      class="rounded-md bg-white px-4 py-2 text-sm font-medium text-ink-950"
+      class="theme-cta rounded-md px-4 py-2 text-sm font-medium"
     >
       Nuevo post
     </a>
   </div>
 
-  <table class="mt-8 w-full text-sm">
-    <thead>
-      <tr class="border-b border-ink-800 text-left text-xs uppercase tracking-widest text-ink-400">
-        <th class="py-2 pr-4">Título</th>
-        <th class="py-2 pr-4">Categoría</th>
-        <th class="py-2 pr-4">Fecha</th>
-        <th class="py-2 pr-4">Estado</th>
-        <th class="py-2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        posts.map((p) => (
-          <tr class="border-b border-ink-900" data-post-row={p.id}>
-            <td class="py-3 pr-4 text-ink-100">{p.title}</td>
-            <td class="py-3 pr-4 text-ink-400">{p.categorySlug}</td>
-            <td class="py-3 pr-4 text-ink-400">{dateFormatter.format(p.pubDate)}</td>
-            <td class="py-3 pr-4">
-              {p.draft ? (
-                <span class="chip">Borrador</span>
-              ) : (
-                <span class="chip">Publicado</span>
-              )}
-              <button
-                type="button"
-                class="chip ml-1 feature-btn"
-                data-id={p.id}
-                data-featured={p.featured ? 'true' : 'false'}
-              >
-                {p.featured ? '★ Destacado' : '☆ Destacar'}
-              </button>
-            </td>
-            <td class="py-3 text-right">
-              <a href={`/admin/posts/${p.id}/edit/`} class="link mr-3">
-                Editar
-              </a>
-              <button type="button" class="link delete-btn" data-id={p.id}>
-                Eliminar
-              </button>
-            </td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+  <div class="mt-8 overflow-x-auto">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-ink-700 text-left text-xs uppercase tracking-widest text-ink-400">
+          <th class="py-2.5 pr-4 font-medium">Título</th>
+          <th class="whitespace-nowrap py-2.5 pr-4 font-medium">Categoría</th>
+          <th class="whitespace-nowrap py-2.5 pr-4 font-medium">Fecha</th>
+          <th class="py-2.5 pr-4 font-medium">Estado</th>
+          <th class="py-2.5 pl-4 text-right font-medium">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          posts.map((p) => (
+            <tr class="border-b border-ink-800 align-middle" data-post-row={p.id}>
+              <td class="py-3 pr-4 text-ink-100">{p.title}</td>
+              <td class="whitespace-nowrap py-3 pr-4 text-ink-400">{p.categorySlug}</td>
+              <td class="whitespace-nowrap py-3 pr-4 text-ink-400">{dateFormatter.format(p.pubDate)}</td>
+              <td class="py-3 pr-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="chip">{p.draft ? 'Borrador' : 'Publicado'}</span>
+                  <button
+                    type="button"
+                    class="chip feature-btn"
+                    data-id={p.id}
+                    data-featured={p.featured ? 'true' : 'false'}
+                  >
+                    {p.featured ? '★ Destacado' : '☆ Destacar'}
+                  </button>
+                </div>
+              </td>
+              <td class="whitespace-nowrap py-3 pl-4 text-right">
+                <a href={`/admin/posts/${p.id}/edit/`} class="link">
+                  Editar
+                </a>
+                <button type="button" class="link delete-btn ml-3" data-id={p.id}>
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
 
   {
     totalPages > 1 && (

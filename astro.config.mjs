@@ -1,8 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import netlify from '@astrojs/netlify';
+
+// ponytail: en local, astro dev no vuelca .env a process.env (que es lo que
+// lee la capa de datos). loadEnv sí lo hace. En Netlify las vars ya vienen en
+// el entorno, así que Object.assign es un no-op inofensivo en prod.
+Object.assign(process.env, loadEnv(process.env.NODE_ENV ?? '', process.cwd(), ''));
 
 // output: 'static' -> las páginas públicas se siguen generando en build-time
 // (ahora consultando Neon en vez de Markdown). El adaptador de Netlify solo

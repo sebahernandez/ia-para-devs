@@ -294,6 +294,9 @@ html.light {
   .chip:hover {
     @apply border-ink-500 text-white;
   }
+  html.light .chip:hover {
+    @apply text-ink-100;
+  }
 
   /* Link con subrayado sutil */
   .link {
@@ -302,6 +305,9 @@ html.light {
   }
   .link:hover {
     @apply decoration-white;
+  }
+  html.light .link:hover {
+    text-decoration-color: rgb(var(--ink-100));
   }
 
   /* ─── Cyberpunk category colors ────────────────────────────────
