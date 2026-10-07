@@ -16,6 +16,14 @@ Nunca dispares el rebuild antes de que el commit esté en el remoto: Netlify con
 
 Un cambio que solo edita/crea contenido en Neon (sin tocar archivos del repo) **no requiere commit**, pero **sí** requiere disparar el rebuild — el sitio es estático y no se actualiza sin un nuevo build.
 
+## Publicar un post
+
+```bash
+npx tsx scripts/publish-post.ts <slug>
+```
+
+Lee `src/content/posts/<slug>.md` (frontmatter + cuerpo), crea el post en Neon y dispara el rebuild. Si el slug ya existe, aborta sin insertar ni reconstruir. Como publica contenido, requiere el mismo visto bueno que cualquier deploy (spec `post-publishing`).
+
 ## Verificación
 
 Tras el rebuild, confirmar que el build hook respondió HTTP 2xx y, cuando aplique, que el contenido esperado ya está accesible en el sitio publicado.

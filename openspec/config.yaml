@@ -1,32 +1,15 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Blog de IA en español: Astro 5 + Tailwind, desplegado en Netlify.
+  Los posts viven en Neon/Postgres (Drizzle); el sitio se genera desde la base de datos en cada build.
+  Hay un panel admin en /admin para crear y editar posts.
+  Los posts publicados por script tienen su fuente en src/content/posts/<slug>.md
+  y se publican con scripts/publish-post.ts (ver spec post-publishing).
+  Contenido y artefactos de OpenSpec en español neutral (ver spec post-content).
+  Deploy solo con aprobación explícita: GitHub y luego rebuild de Netlify (ver spec deployment y DEPLOY.md).
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
-
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+rules:
+  proposal:
+    - Las specs describen capacidades duraderas del sistema. No crear una capability por post.
+    - Un cambio que solo agrega un post usa skip_specs true en .openspec.yaml, salvo que cambie una regla de post-content o post-publishing.
