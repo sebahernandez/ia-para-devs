@@ -2,7 +2,7 @@
 title: "Claude Sonnet 5.5: casi tan bueno como Opus, por el mismo precio de siempre"
 description: "Anthropic lanzó Claude Sonnet 5.5: hasta 30% más rápido y más barato por tarea que Sonnet 5, con calidad cercana a Opus 5.5 y sin subir el precio. Esto es lo que ganas tú."
 pubDate: 2026-09-28
-author: Sebacure
+author: slagosdev
 category: modelos
 tags:
   - Claude

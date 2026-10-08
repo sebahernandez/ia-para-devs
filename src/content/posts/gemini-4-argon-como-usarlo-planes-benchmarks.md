@@ -2,7 +2,7 @@
 title: "Gemini 4 Argon: lidera los benchmarks, pero todavía no puedes usarlo"
 description: "Google presentó Gemini 4 Argon: gana 12 de 18 benchmarks frente a GPT-6 Astra y Claude Opus 5.5. Te cuento quién puede usarlo hoy, en qué planes llegará, cuánto cuesta y cómo prepararte."
 pubDate: 2026-10-07
-author: Sebacure
+author: slagosdev
 category: modelos
 tags:
   - Gemini

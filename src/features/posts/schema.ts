@@ -1,6 +1,9 @@
 import { z } from 'zod';
 import type { PostInput } from './types';
 
+// Único autor válido mientras el blog no tenga multiusuario (spec post-publishing).
+export const POST_AUTHOR = 'slagosdev';
+
 // Forma del JSON que envía el formulario del admin.
 export const postInputSchema = z.object({
   title: z.string().min(1),
@@ -9,7 +12,7 @@ export const postInputSchema = z.object({
   category: z.string().min(1),
   pubDate: z.coerce.date(),
   tags: z.array(z.string()),
-  author: z.string().min(1),
+  author: z.literal(POST_AUTHOR).default(POST_AUTHOR),
   draft: z.boolean(),
   featured: z.boolean(),
   content: z.string().min(1),

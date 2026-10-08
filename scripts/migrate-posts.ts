@@ -14,7 +14,7 @@ const frontmatterSchema = z.object({
   description: z.string(),
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
-  author: z.string().default('Sebacure'),
+  author: z.string().default('slagosdev'),
   tags: z.array(z.string()).default([]),
   category: z.enum(['modelos', 'herramientas', 'investigacion', 'opinión', 'tutorial']),
   draft: z.boolean().default(false),

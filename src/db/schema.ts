@@ -21,7 +21,7 @@ export const posts = pgTable(
     contentHtml: text('content_html').notNull(),
     pubDate: timestamp('pub_date', { withTimezone: true }).notNull(),
     updatedDate: timestamp('updated_date', { withTimezone: true }),
-    author: text('author').notNull().default('Sebacure'),
+    author: text('author').notNull().default('slagosdev'),
     categorySlug: text('category_slug')
       .notNull()
       .references(() => categories.slug),

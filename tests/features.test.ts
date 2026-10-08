@@ -42,7 +42,7 @@ test('esquema de post: acepta una entrada válida y rechaza slug inválido o tí
     category: 'modelos',
     pubDate: '2026-10-08',
     tags: ['llm'],
-    author: 'Sebacure',
+    author: 'slagosdev',
     draft: true,
     featured: false,
     content: 'Cuerpo',
@@ -55,6 +55,10 @@ test('esquema de post: acepta una entrada válida y rechaza slug inválido o tí
 
   assert.equal(postInputSchema.safeParse({ ...valid, slug: 'Slug Inválido' }).success, false);
   assert.equal(postInputSchema.safeParse({ ...valid, title: '' }).success, false);
+
+  const { author: _omit, ...sinAutor } = valid;
+  assert.equal(postInputSchema.parse(sinAutor).author, 'slagosdev');
+  assert.equal(postInputSchema.safeParse({ ...valid, author: 'Sebacure' }).success, false);
 });
 
 test('credenciales: exige usuario y contraseña correctos', () => {
