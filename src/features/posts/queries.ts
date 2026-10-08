@@ -1,27 +1,7 @@
 import { asc, desc, eq } from 'drizzle-orm';
-import { db } from './db';
-import { categories, posts } from '../db/schema';
-
-export type Category = {
-  slug: string;
-  label: string;
-  description: string;
-  accentClass: string;
-};
-
-export type PostSummary = {
-  slug: string;
-  title: string;
-  description: string;
-  pubDate: Date;
-  updatedDate: Date | null;
-  author: string;
-  category: Category;
-  tags: string[];
-  featured: boolean;
-};
-
-export type Post = PostSummary & { contentHtml: string };
+import { categories, posts } from '~/db/schema';
+import { db } from '~/lib/db';
+import type { Category, Post, PostSummary } from './types';
 
 const withRelations = {
   with: {

@@ -5,7 +5,7 @@ import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { z } from 'zod';
 import { posts, tags, postTags } from '../src/db/schema';
-import { renderMarkdown } from '../src/lib/markdown';
+import { renderMarkdown } from '../src/features/posts/markdown';
 
 // Espejo exacto del schema en src/content.config.ts, para no migrar silenciosamente
 // datos que Astro nunca hubiera aceptado.

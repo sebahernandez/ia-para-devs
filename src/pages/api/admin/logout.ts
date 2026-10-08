@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { SESSION_COOKIE_NAME } from '../../../lib/auth';
+import { SESSION_COOKIE_NAME } from '~/features/auth/session';
 
 export const POST: APIRoute = async ({ cookies, redirect }) => {
   cookies.delete(SESSION_COOKIE_NAME, { path: '/' });

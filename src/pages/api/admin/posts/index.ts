@@ -1,49 +1,21 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { z } from 'zod';
-import { createPost, slugExists, triggerRebuild } from '../../../../lib/admin-posts';
-
-const postInputSchema = z.object({
-  title: z.string().min(1),
-  slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'Slug inválido'),
-  description: z.string().min(1),
-  category: z.string().min(1),
-  pubDate: z.coerce.date(),
-  tags: z.array(z.string()),
-  author: z.string().min(1),
-  draft: z.boolean(),
-  featured: z.boolean(),
-  content: z.string().min(1),
-});
+import { createPost, slugExists } from '~/features/posts/admin';
+import { postInputSchema, toPostInput } from '~/features/posts/schema';
+import { json } from '~/lib/http';
+import { triggerRebuild } from '~/lib/rebuild';
 
 export const POST: APIRoute = async ({ request }) => {
-  const json = await request.json().catch(() => null);
-  const parsed = postInputSchema.safeParse(json);
-  if (!parsed.success) {
-    return new Response(JSON.stringify({ error: parsed.error.message }), { status: 400 });
-  }
-  const input = parsed.data;
+  const parsed = postInputSchema.safeParse(await request.json().catch(() => null));
+  if (!parsed.success) return json({ error: parsed.error.message }, 400);
+  const input = toPostInput(parsed.data, null);
 
-  if (await slugExists(input.slug)) {
-    return new Response(JSON.stringify({ error: 'Ya existe un post con ese slug.' }), { status: 409 });
-  }
+  if (await slugExists(input.slug)) return json({ error: 'Ya existe un post con ese slug.' }, 409);
 
-  await createPost({
-    slug: input.slug,
-    title: input.title,
-    description: input.description,
-    contentMd: input.content,
-    pubDate: input.pubDate,
-    updatedDate: null,
-    author: input.author,
-    categorySlug: input.category,
-    draft: input.draft,
-    featured: input.featured,
-    tags: input.tags,
-  });
+  await createPost(input);
 
   if (!input.draft) await triggerRebuild();
 
-  return new Response(JSON.stringify({ ok: true }), { status: 201 });
+  return json({ ok: true }, 201);
 };

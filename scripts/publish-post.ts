@@ -15,7 +15,8 @@ if (!SLUG) {
 }
 
 async function main() {
-  const { slugExists, createPost, triggerRebuild } = await import('../src/lib/admin-posts');
+  const { slugExists, createPost } = await import('../src/features/posts/admin');
+  const { triggerRebuild } = await import('../src/lib/rebuild');
 
   const file = path.join(import.meta.dirname, '..', 'src', 'content', 'posts', `${SLUG}.md`);
   const { data, content } = matter(readFileSync(file, 'utf-8'));

@@ -1,5 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { SESSION_COOKIE_NAME, verifySessionCookieValue } from './lib/auth';
+import { SESSION_COOKIE_NAME, verifySessionCookieValue } from '~/features/auth/session';
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;

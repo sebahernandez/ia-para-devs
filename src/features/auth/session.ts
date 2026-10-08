@@ -1,24 +1,19 @@
-import { createHmac, randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
+import { createHmac, timingSafeEqual } from 'node:crypto';
+import { env } from '~/lib/env';
 
 export const SESSION_COOKIE_NAME = 'admin_session';
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 días
 
-export function hashPassword(password: string): string {
-  const salt = randomBytes(16).toString('hex');
-  const hash = scryptSync(password, salt, 64).toString('hex');
-  return `${salt}:${hash}`;
-}
-
-export function verifyPassword(password: string, stored: string): boolean {
-  const [salt, hash] = stored.split(':');
-  if (!salt || !hash) return false;
-  const candidate = scryptSync(password, salt, 64);
-  const expected = Buffer.from(hash, 'hex');
-  return candidate.length === expected.length && timingSafeEqual(candidate, expected);
-}
+export const SESSION_COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'lax',
+  path: '/',
+  maxAge: SESSION_MAX_AGE,
+} as const;
 
 function sign(payload: string): string {
-  return createHmac('sha256', process.env.SESSION_SECRET!).update(payload).digest('base64url');
+  return createHmac('sha256', env('SESSION_SECRET')).update(payload).digest('base64url');
 }
 
 export function createSessionCookieValue(): string {

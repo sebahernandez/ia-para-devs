@@ -1,34 +1,25 @@
 import { and, desc, eq, ne } from 'drizzle-orm';
-import { db } from './db';
-import { withWriteDb } from './db-write';
+import { posts, postTags, tags } from '~/db/schema';
+import { db } from '~/lib/db';
+import { withWriteDb, type WriteTx } from '~/lib/db-write';
 import { renderMarkdown } from './markdown';
-import { posts, postTags, tags } from '../db/schema';
+import type { AdminPostRow, PostForEdit, PostInput } from './types';
 
-export type PostInput = {
-  slug: string;
-  title: string;
-  description: string;
-  contentMd: string;
-  pubDate: Date;
-  updatedDate: Date | null;
-  author: string;
-  categorySlug: string;
-  draft: boolean;
-  featured: boolean;
-  tags: string[];
-};
+async function addTags(tx: WriteTx, postId: number, names: string[]): Promise<void> {
+  for (const name of names) {
+    const [{ id: tagId }] = await tx
+      .insert(tags)
+      .values({ name })
+      .onConflictDoUpdate({ target: tags.name, set: { name } })
+      .returning({ id: tags.id });
+    await tx.insert(postTags).values({ postId, tagId });
+  }
+}
 
-export type AdminPostRow = {
-  id: number;
-  slug: string;
-  title: string;
-  categorySlug: string;
-  draft: boolean;
-  featured: boolean;
-  pubDate: Date;
-};
-
-export type PostForEdit = PostInput & { id: number };
+// Solo puede haber un post destacado a la vez.
+async function clearOtherFeatured(tx: WriteTx, postId: number): Promise<void> {
+  await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, postId)));
+}
 
 export async function listAllPostsForAdmin(): Promise<AdminPostRow[]> {
   // Orden por fecha de publicación (más reciente primero), con id como
@@ -83,19 +74,8 @@ export async function createPost(input: PostInput): Promise<number> {
         .values({ ...input, contentHtml })
         .returning({ id: posts.id });
 
-      for (const name of input.tags) {
-        const [{ id: tagId }] = await tx
-          .insert(tags)
-          .values({ name })
-          .onConflictDoUpdate({ target: tags.name, set: { name } })
-          .returning({ id: tags.id });
-        await tx.insert(postTags).values({ postId, tagId });
-      }
-
-      // Solo puede haber un post destacado a la vez.
-      if (input.featured) {
-        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, postId)));
-      }
+      await addTags(tx, postId, input.tags);
+      if (input.featured) await clearOtherFeatured(tx, postId);
 
       return postId;
     })
@@ -114,19 +94,8 @@ export async function updatePost(id: number, input: PostInput): Promise<void> {
 
       await tx.delete(postTags).where(eq(postTags.postId, id));
 
-      for (const name of input.tags) {
-        const [{ id: tagId }] = await tx
-          .insert(tags)
-          .values({ name })
-          .onConflictDoUpdate({ target: tags.name, set: { name } })
-          .returning({ id: tags.id });
-        await tx.insert(postTags).values({ postId: id, tagId });
-      }
-
-      // Solo puede haber un post destacado a la vez.
-      if (input.featured) {
-        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, id)));
-      }
+      await addTags(tx, id, input.tags);
+      if (input.featured) await clearOtherFeatured(tx, id);
     })
   );
 }
@@ -140,21 +109,8 @@ export async function deletePost(id: number): Promise<void> {
 export async function setPostFeatured(id: number, featured: boolean): Promise<void> {
   await withWriteDb(async (writeDb) =>
     writeDb.transaction(async (tx) => {
-      if (featured) {
-        await tx.update(posts).set({ featured: false }).where(and(eq(posts.featured, true), ne(posts.id, id)));
-      }
+      if (featured) await clearOtherFeatured(tx, id);
       await tx.update(posts).set({ featured }).where(eq(posts.id, id));
     })
   );
-}
-
-export async function triggerRebuild(): Promise<void> {
-  const url = process.env.NETLIFY_BUILD_HOOK_URL;
-  if (!url) return;
-  try {
-    await fetch(url, { method: 'POST' });
-  } catch {
-    // El contenido ya quedó guardado en Neon; un fallo del webhook no debe
-    // hacer fallar el guardado, solo retrasar la publicación del rebuild.
-  }
 }

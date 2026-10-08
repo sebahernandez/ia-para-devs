@@ -2,7 +2,7 @@
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import PostForm from '../../../components/admin/PostForm.astro';
-import { getAllCategoryDefs } from '../../../lib/posts';
+import { getAllCategoryDefs } from '~/features/posts/queries';
 
 const categories = await getAllCategoryDefs();
 ---
