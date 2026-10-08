@@ -1,6 +1,7 @@
 // Uso: npm test
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { verifyCredentials } from '~/features/auth/credentials';
 import { hashPassword, verifyPassword } from '~/features/auth/password';
 import { createSessionCookieValue, verifySessionCookieValue } from '~/features/auth/session';
 import { postInputSchema, toPostInput } from '~/features/posts/schema';
@@ -54,4 +55,17 @@ test('esquema de post: acepta una entrada válida y rechaza slug inválido o tí
 
   assert.equal(postInputSchema.safeParse({ ...valid, slug: 'Slug Inválido' }).success, false);
   assert.equal(postInputSchema.safeParse({ ...valid, title: '' }).success, false);
+});
+
+test('credenciales: exige usuario y contraseña correctos', () => {
+  const expected = { username: 'Admin', passwordHash: hashPassword('secreta') };
+  const check = (username: string, password: string) => verifyCredentials({ username, password }, expected);
+
+  assert.equal(check('Admin', 'secreta'), true);
+  assert.equal(check('  aDMIN ', 'secreta'), true);
+  assert.equal(check('Admin', 'otra'), false);
+  assert.equal(check('otro', 'secreta'), false);
+  assert.equal(check('', 'secreta'), false);
+  assert.equal(check('Admin', ''), false);
+  assert.equal(verifyCredentials({ username: '', password: 'secreta' }, { ...expected, username: '' }), false);
 });

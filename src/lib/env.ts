@@ -1,4 +1,4 @@
-type RequiredEnv = 'DATABASE_URL' | 'SESSION_SECRET' | 'ADMIN_PASSWORD_HASH';
+type RequiredEnv = 'DATABASE_URL' | 'SESSION_SECRET' | 'ADMIN_USERNAME' | 'ADMIN_PASSWORD_HASH';
 
 // Único punto de lectura de las variables de entorno obligatorias.
 export function env(name: RequiredEnv): string {
