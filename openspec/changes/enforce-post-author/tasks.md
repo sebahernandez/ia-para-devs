@@ -15,4 +15,4 @@
 ## 3. Verificación de integración
 
 - [x] 3.1 Correr `npm test` y `npm run build` y verificar que ambos terminan sin errores y que las páginas generadas en `dist/` muestran `slagosdev` como autor
-- [ ] 3.2 Con el visto bueno explícito del usuario para desplegar: commit, `git push` y rebuild de Netlify según `DEPLOY.md`. Verificar que un post publicado y el RSS muestran `slagosdev`
+- [x] 3.2 Con el visto bueno explícito del usuario para desplegar: commit, `git push` y rebuild de Netlify según `DEPLOY.md`. Verificar que un post publicado y el RSS muestran `slagosdev`
