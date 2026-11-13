@@ -24,5 +24,5 @@
 ## 5. Entrega
 
 - [x] 5.1 Con el visto bueno explícito del usuario: commit y `git push`; luego `update-post.ts` para cada post modificado (los dos reescritos y los cinco con enlaces); verificar en producción el título nuevo, la fecha de actualización y los enlaces internos
-- [ ] 5.2 Pasos manuales del usuario: crear el sitio en Umami Cloud, copiar su ID a la variable `PUBLIC_UMAMI_WEBSITE_ID` en Netlify y disparar un rebuild; en Search Console, pedir la indexación de las dos URLs reescritas con "Inspeccionar URL"
+- [x] 5.2 Pasos manuales del usuario: crear el sitio en Umami Cloud, copiar su ID a la variable `PUBLIC_UMAMI_WEBSITE_ID` en Netlify y disparar un rebuild; en Search Console, pedir la indexación de las dos URLs reescritas con "Inspeccionar URL"
 - [ ] 5.3 A las tres o cuatro semanas, comparar en Search Console la posición y los clics de los dos posts contra los valores de `proposal.md`
