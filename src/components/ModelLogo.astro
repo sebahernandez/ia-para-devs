@@ -1,0 +1,43 @@
+---
+// Decorative AI model logo. The post title already names the model, so screen
+// readers skip it and it never takes focus or clicks.
+import type { ModelLogo } from '~/features/posts/model-logo';
+
+interface Props {
+  logo: ModelLogo;
+  size: number;
+  class?: string;
+}
+
+const { logo, size, class: className = '' } = Astro.props;
+const single = logo.light === logo.dark;
+---
+
+<span class={`pointer-events-none select-none ${className}`} aria-hidden="true">
+  {
+    single ? (
+      <img src={logo.dark} alt="" width={size} height={size} loading="lazy" decoding="async" />
+    ) : (
+      <>
+        <img class="logo-on-dark" src={logo.dark} alt="" width={size} height={size} loading="lazy" decoding="async" />
+        <img class="logo-on-light" src={logo.light} alt="" width={size} height={size} loading="lazy" decoding="async" />
+      </>
+    )
+  }
+</span>
+
+<style>
+  img {
+    display: block;
+    object-fit: contain;
+  }
+  .logo-on-light {
+    display: none;
+  }
+  :global(html.light) .logo-on-dark {
+    display: none;
+  }
+  :global(html.light) .logo-on-light {
+    display: block;
+  }
+</style>

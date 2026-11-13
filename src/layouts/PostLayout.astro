@@ -3,6 +3,8 @@ import type { Post } from '~/features/posts/types';
 import BaseLayout from './BaseLayout.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import { getCatClass } from '../utils/categories';
+import ModelLogo from '../components/ModelLogo.astro';
+import { getModelLogo } from '~/features/posts/model-logo';
 
 interface Props {
   post: Post;
@@ -10,6 +12,8 @@ interface Props {
 
 const { post } = Astro.props;
 const data = post;
+const logo = getModelLogo(post);
+const logoGap = logo ? 'pr-14' : '';
 
 const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   year: 'numeric',
@@ -33,8 +37,10 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
       </a>
     </nav>
 
-    <header class="mb-12">
-      <div class="flex flex-wrap items-center gap-3 text-xs text-ink-400">
+    <header class="relative mb-12">
+      {logo && <ModelLogo logo={logo} size={40} class="absolute right-0 top-0" />}
+
+      <div class={`flex flex-wrap items-center gap-3 text-xs text-ink-400 ${logoGap}`}>
         <a
           href={`/categorias/${data.category.slug}/`}
           class={`font-mono uppercase tracking-widest transition-[filter] hover:brightness-125 ${getCatClass(data.category.slug)}`}
@@ -61,7 +67,7 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
       </div>
 
       <h1
-        class="mt-5 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
+        class={`mt-5 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl ${logoGap}`}
         transition:name={`post-title-${post.slug}`}
       >
         {data.title}

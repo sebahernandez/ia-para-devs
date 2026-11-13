@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import { verifyCredentials } from '~/features/auth/credentials';
 import { hashPassword, verifyPassword } from '~/features/auth/password';
 import { createSessionCookieValue, verifySessionCookieValue } from '~/features/auth/session';
+import { getModelLogo } from '~/features/posts/model-logo';
 import { postInputSchema, toPostInput } from '~/features/posts/schema';
 import { parseId } from '~/lib/http';
 
@@ -72,4 +73,18 @@ test('credenciales: exige usuario y contraseña correctos', () => {
   assert.equal(check('', 'secreta'), false);
   assert.equal(check('Admin', ''), false);
   assert.equal(verifyCredentials({ username: '', password: 'secreta' }, { ...expected, username: '' }), false);
+});
+
+test('logo del modelo: elige el primer modelo del título, solo en modelos', () => {
+  const logo = (title: string, slug = 'modelos') => getModelLogo({ title, category: { slug } })?.name ?? null;
+
+  assert.equal(logo('Claude Fable 5.2: qué trae de nuevo, cuánto cuesta y en qué planes está'), 'Claude');
+  assert.equal(logo('Sonnet 5.5: casi tan bueno como Opus'), 'Claude');
+  assert.equal(logo('Gemini 4 Argon frente a GPT-6 y Claude Opus 5.5'), 'Gemini');
+  assert.equal(logo('GPT-6 Astra llega a la API'), 'OpenAI');
+  assert.equal(logo('Gemma 2: los modelos ligeros de Google'), 'Google');
+  assert.equal(logo('Phi-4 de Microsoft'), null);
+  assert.equal(logo('Claude en tu editor', 'herramientas'), null);
+  assert.equal(logo('Cómo elegir un modelo de lenguaje'), null);
+  assert.equal(logo('La meta del año para los LLM'), null);
 });
