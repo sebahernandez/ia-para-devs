@@ -14,6 +14,13 @@ const recent = allPosts.filter((p) => p.slug !== featured?.slug).slice(0, 6);
 <BaseLayout
   title="Blog IA para devs · Noticias y análisis de modelos de IA"
   description="Noticias, análisis y tutoriales sobre modelos de inteligencia artificial y herramientas para desarrolladores."
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Blog IA para devs',
+    url: Astro.site?.toString(),
+    inLanguage: 'es',
+  }}
 >
   <!-- HERO -->
   <section class="relative overflow-hidden">

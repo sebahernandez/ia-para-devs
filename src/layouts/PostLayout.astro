@@ -15,6 +15,25 @@ const data = post;
 const logo = getModelLogo(post);
 const logoGap = logo ? 'pr-14' : '';
 
+const siteName = 'Blog IA para devs';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.pubDate.toISOString(),
+  ...(data.updatedDate && { dateModified: data.updatedDate.toISOString() }),
+  author: { '@type': 'Person', name: data.author },
+  publisher: {
+    '@type': 'Organization',
+    name: siteName,
+    logo: { '@type': 'ImageObject', url: new URL('/logo-white.svg', Astro.site).toString() },
+  },
+  image: new URL('/og-default.png', Astro.site).toString(),
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  inLanguage: 'es',
+};
+
 const dateFormatter = new Intl.DateTimeFormat('es-CL', {
   year: 'numeric',
   month: 'long',
@@ -23,10 +42,11 @@ const dateFormatter = new Intl.DateTimeFormat('es-CL', {
 ---
 
 <BaseLayout
-  title={`${data.title} · Blog IA para devs`}
+  title={`${data.title} · ${siteName}`}
   description={data.description}
   type="article"
   pubDate={data.pubDate}
+  jsonLd={jsonLd}
 >
   <ReadingProgress />
 

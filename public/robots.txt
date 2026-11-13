@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blog-ia.example.com/sitemap-index.xml
+Sitemap: https://iaparadevs.com/sitemap-index.xml

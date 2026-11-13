@@ -24,9 +24,10 @@ export default defineConfig({
     }),
     sitemap({
       // El panel de admin y sus API routes no son contenido público.
+      // Los tags llevan noindex (contenido delgado), así que tampoco van.
       filter: (page) => {
         const path = new URL(page).pathname;
-        return !path.startsWith('/admin/') && !path.startsWith('/api/');
+        return !['/admin/', '/api/', '/tags/'].some((p) => path.startsWith(p));
       },
     }),
   ],

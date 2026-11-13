@@ -1,5 +1,6 @@
 // Uso: npm test
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { verifyCredentials } from '~/features/auth/credentials';
 import { hashPassword, verifyPassword } from '~/features/auth/password';
@@ -87,4 +88,11 @@ test('logo del modelo: elige el primer modelo del título, solo en modelos', () 
   assert.equal(logo('Claude en tu editor', 'herramientas'), null);
   assert.equal(logo('Cómo elegir un modelo de lenguaje'), null);
   assert.equal(logo('La meta del año para los LLM'), null);
+});
+
+test('robots.txt: apunta al sitemap del dominio configurado en astro', () => {
+  const site = readFileSync('astro.config.mjs', 'utf8').match(/site:\s*'([^']+)'/)?.[1];
+  const sitemap = readFileSync('public/robots.txt', 'utf8').match(/^Sitemap:\s*(\S+)/m)?.[1];
+  assert.ok(site);
+  assert.equal(sitemap, new URL('/sitemap-index.xml', site).toString());
 });
