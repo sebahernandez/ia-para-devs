@@ -24,5 +24,5 @@
 
 ## 5. Entrega
 
-- [ ] 5.1 Con el visto bueno explícito del usuario: commit, `git push` y rebuild de Netlify según `deployment`; verificar en producción que `robots.txt` apunta al dominio correcto, que `/og-default.png` responde 200 con `image/png` y que un post tiene su `BlogPosting`
+- [x] 5.1 Con el visto bueno explícito del usuario: commit, `git push` y rebuild de Netlify según `deployment`; verificar en producción que `robots.txt` apunta al dominio correcto, que `/og-default.png` responde 200 con `image/png` y que un post tiene su `BlogPosting`
 - [ ] 5.2 Pasos manuales del usuario (no los ejecuta el agente): en Search Console (propiedad de dominio `iaparadevs.com`, ya verificada), confirmar en "Sitemaps" que `https://iaparadevs.com/sitemap-index.xml` está enviado y sin errores, y reenviarlo tras el deploy; importar la propiedad en Bing Webmaster Tools desde Search Console; a las dos semanas revisar en Search Console el informe "Páginas" (indexadas y motivos de exclusión)
