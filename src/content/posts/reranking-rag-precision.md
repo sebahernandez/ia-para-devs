@@ -32,6 +32,8 @@ Un modelo cross-encoder mira **la pregunta y el documento juntos** y emite un sc
 
 Recuperas ancho, reordenas fino, entregas estrecho. Lo mejor de los dos mundos.
 
+Si guardas tus embeddings en PostgreSQL, en la [guía de pgvector para búsqueda vectorial](/blog/vector-search-pgvector/) ves cómo traer esos candidatos con un índice HNSW.
+
 ## El impacto real
 
 En la práctica, subir de top-5 vectorial directo a top-5 tras rerankear sobre 50 candidatos mejora notablemente la faithfulness de las respuestas, porque el modelo ya no tiene que ignorar ruido. Y como el LLM recibe menos documentos y mejores, también bajas el coste de generación.

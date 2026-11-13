@@ -42,7 +42,7 @@ MCP brilla en dos escenarios concretos:
 
 ## El overhead real de MCP
 
-Para ser específicos: implementar un servidor MCP básico en TypeScript son unas 50-100 líneas. No es dramáticamente complejo. El overhead no es en la implementación inicial sino en:
+Para ser específicos: implementar un servidor MCP básico en TypeScript son unas 50-100 líneas. No es dramáticamente complejo: en [este tutorial para crear un servidor MCP paso a paso](/blog/mcp-servidores-propios-tutorial/) tienes un ejemplo completo de unas 40 líneas. El overhead no es en la implementación inicial sino en:
 
 - Gestionar el proceso del servidor (start/stop, logs, actualizaciones)
 - Debuggear problemas de comunicación entre cliente y servidor

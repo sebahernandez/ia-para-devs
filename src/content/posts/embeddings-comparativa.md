@@ -52,6 +52,8 @@ La desventaja: tienes que alojar el modelo tú mismo o usar un proveedor como Hu
 
 **Usa BGE-M3 o similar si**: quieres control total, no quieres pagar por token de embedding, o necesitas un modelo que puedas ejecutar on-premise.
 
+Una vez elegido el modelo, puedes guardar y consultar los vectores en tu propia base de datos con [pgvector en PostgreSQL](/blog/vector-search-pgvector/).
+
 ## La métrica que importa: MTEB
 
 El Massive Text Embedding Benchmark evalúa modelos en 58 datasets y 8 categorías: clasificación, clustering, retrieval, reranking, etc. Es el benchmark estándar de la industria para comparar embeddings.

@@ -70,6 +70,8 @@ server.tool('consultar-base-datos', {
 });
 ```
 
+Si quieres el paso a paso completo, con código probado y la conexión con Claude, mira [cómo crear un servidor MCP paso a paso en TypeScript](/blog/mcp-servidores-propios-tutorial/).
+
 ## Adopción actual
 
 Desde su publicación, varios proveedores y plataformas han implementado MCP:

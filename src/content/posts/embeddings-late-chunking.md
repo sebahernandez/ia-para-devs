@@ -100,6 +100,8 @@ chunk_embeddings = late_chunking(documento, chunk_size=256)
 - El modelo de embedding tiene ventana de contexto pequeña (limitación técnica)
 - La velocidad de indexación es crítica (late chunking requiere procesar el documento completo)
 
+Para guardar y consultar esos embeddings sin sumar otra base de datos, mira [cómo usar pgvector en PostgreSQL](/blog/vector-search-pgvector/).
+
 ## Limitaciones
 
 **Longitud del documento**: late chunking requiere procesar el documento entero en una sola pasada. Los modelos de embedding tienen ventanas de contexto limitadas (típicamente 8K tokens). Para documentos muy largos, hay que dividir en secciones primero y aplicar late chunking en cada sección.
